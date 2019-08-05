@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Nav from "./components/Nav/Nav";
+
+/**
+ * views
+ */
+import HomeView from "./views/HomeView";
+import ProfileView from "./views/ProfileView";
+import SettingsView from "./views/SettingsView";
+import UsersView from "./views/UsersView";
+
+const Emma = () => {
+    return (
+        <div>
+            <h3>Fuck!</h3>
+        </div>
+    )
+}
+
+// route works but only after a refresh!
+// works well with exact but requires a refresh
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <Router>
+            <div  className="App">
+                <header>
+                    <Nav />
+                </header>
+                <Route exact path="/" component={HomeView} />
+                <Route path="/settings" component={SettingsView} />
+                <Route exact path="/users" component={UsersView} />
+                <Route exact path="/users/:id" component={ProfileView} />
+                <Route path="/users/:id/posts/" component={Emma} />
+            </div>
+        </Router>
     );
   }
 }
