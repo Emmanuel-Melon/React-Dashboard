@@ -12,23 +12,39 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/LocationCity';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/Smartphone';
+import ListSubheader from "@material-ui/core/ListSubheader";
 
 const useStyles = makeStyles(theme => ({
     avatar: {
-      background: "#81C784"
+      background: "orange"
     },
     root: {
         width: '100%',
-        maxWidth: 360
+        maxWidth: 360,
     },
+    ContactDetail: {
+        borderRadius: 8,
+        "&:hover": {
+            background: "#ebfaec",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);",
+            cursor: "pointer"
+        },
+    }
 }));
 
 export default function FolderList() {
     const classes = useStyles();
 
     return (
-        <List className={classes.root}>
-            <ListItem>
+        <List
+            className={classes.root}
+            subheader={
+                <ListSubheader component="div" id="nested-list-subheader">
+                    Contact Info
+                </ListSubheader>
+            }
+        >
+            <ListItem className={classes.ContactDetail}>
                 <ListItemAvatar>
                     <Avatar className={classes.avatar}>
                         <ImageIcon />
@@ -38,7 +54,7 @@ export default function FolderList() {
                     primary="Muyenga"
                     secondary="Nalule Road" />
             </ListItem>
-            <ListItem>
+            <ListItem className={classes.ContactDetail}>
                 <ListItemAvatar>
                     <Avatar className={classes.avatar}>
                         <WorkIcon />
@@ -48,7 +64,7 @@ export default function FolderList() {
                     primary="Joined"
                     secondary="Jan 7, 2014" />
             </ListItem>
-            <ListItem>
+            <ListItem className={classes.ContactDetail}>
                 <ListItemAvatar>
                     <Avatar className={classes.avatar}>
                         <BeachAccessIcon />
