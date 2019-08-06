@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => (
             width: '100%',
             maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
+            "&:hover": {
+                boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);",
+                cursor: "pointer"
+            }
         },
         title: {
             color: "orange",
@@ -40,7 +44,6 @@ export default function UserProfileCard() {
 
     return (
         <Card className={classes.card}>
-            <CardActionArea>
                 <CardMedia
                     className={classes.media}
                     image="https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png"
@@ -48,13 +51,12 @@ export default function UserProfileCard() {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Emmanuel Gabriel <span className={classes.title}>(Garbage Collector)</span>
+                        Emmanuel Gabriel <span className={classes.title}>(Collector)</span>
                     </Typography>
 
                     <UserDataSummary/>
                     <UserContactInfo/>
                 </CardContent>
-            </CardActionArea>
 
         </Card>
     );
