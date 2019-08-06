@@ -52,7 +52,7 @@ class ListUsers extends React.Component {
 
     handleFetchingAgents = async () => {
         const { error } = this.state;
-        const result = await fetchData('provider/GarbageCollectors//binit/agents');
+        const result = await fetchData('provider/GarbageCollectors/binit/agents');
         const { errorMessage } = result;
         errorMessage && this.setState({
             error: !error
@@ -104,11 +104,3 @@ class ListUsers extends React.Component {
 }
 
 export default withRouter(ListUsers);
-
-// use link or normal div?
-// make some parts clickable
-/**
- * to={{
-                                    pathname: `/users/${user.id}`
-                                }}
- */
