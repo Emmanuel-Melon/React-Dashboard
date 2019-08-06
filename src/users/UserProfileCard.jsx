@@ -17,7 +17,7 @@ import UserDataSummary from "./UserDataSummary";
 const useStyles = makeStyles(theme => (
     {
         card: {
-            maxWidth: 345,
+            width: '100%',
             padding: 0
         },
         media: {
@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => (
         },
         root: {
             width: '100%',
-            maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
             "&:hover": {
                 boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);",

@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         width: '100%',
-        maxWidth: 360,
     },
     ContactDetail: {
         borderRadius: 8,
