@@ -1,0 +1,101 @@
+.navbar {
+  margin-top: 0;
+  background-color: #e08c05;
+  height: 65px;
+  width: 100%;
+  position: relative;
+
+  &__header {
+    display: inline;
+
+    &__brand {
+      display: inline-block;
+      font-size: 22px;
+      padding: 15px;
+    }
+  }
+
+  &__links {
+    float: right;
+    font-size: 18px;
+
+    & > a {
+      display: inline-block;
+      padding: 18px 15px;
+      text-decoration: none;
+      color: #333;
+      &:hover {
+        font-size: 22px;
+        color: white;
+
+      }
+    }
+  }
+
+  &__btn {
+    display: none;
+  }
+
+  &> #navbar-check {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #navbar-check {
+    display: inline;
+  }
+  .navbar__btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+
+    & > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+      & > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #333;
+      }
+    }
+  }
+
+  .navbar  #navbar-check:checked ~ .navbar__btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar__links {
+    display: block;
+    width: 100%;
+    background-color: #e08c05;
+    height: 0px;
+    text-align: center;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+
+    & > a {
+      display: block;
+      width: 100%;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  .navbar > #navbar-check:not(checked) ~ .navbar__links {
+    height: 0px;
+  }
+
+  .navbar > #navbar-check:checked ~ .navbar__links {
+    height: auto;
+    overflow-y: auto;
+  }
+}
