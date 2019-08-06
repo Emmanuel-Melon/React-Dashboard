@@ -22,7 +22,7 @@ export default function ManageUsers() {
     return (
         <div className={classes.ManageUsers}>
             <div className={classes.Employee}>
-                <h3>Employee</h3>
+                <h3>Agents</h3>
             </div>
             <div className={classes.Stats}>
                 <h3>Stats</h3>
