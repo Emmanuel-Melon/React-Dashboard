@@ -99,6 +99,9 @@ class User extends React.Component{
                         <DeleteIcon color={"secondary"}/>
                     </div>
                 </div>
+                <div>
+                    <button>View Profile</button>
+                </div>
             </Paper>
         );
     }
