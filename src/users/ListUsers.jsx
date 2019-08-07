@@ -7,6 +7,9 @@ import { withRouter, NavLink, Redirect } from "react-router-dom";
 import User from "./UserOverview";
 import ManageUsers from "./ManageUsers";
 
+import fetchData from '../services/api';
+import ErrorComponent from "../components/Error/ErrorComponent";
+
 const users = [
     {
         avatar: "https://bo.training/wp-content/uploads/2017/08/employee-training-avatar-full-size-v1.png",
@@ -36,13 +39,24 @@ const users = [
 
 
 class ListUsers extends React.Component {
+    state = {
+        selectedUser: null,
+        isFetching: false,
+        data: [],
+        error: false,
+    }
 
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-        this.state = {
-            selectedUser: null
-        }
+    componentDidMount() {
+        this.handleFetchingAgents();
+    }
+
+    handleFetchingAgents = async () => {
+        const { error } = this.state;
+        const result = await fetchData('provider/GarbageCollectors/binit/agents');
+        const { errorMessage } = result;
+        errorMessage && this.setState({
+            error: !error
+        })
     }
 
     handleClick (id) {
@@ -50,6 +64,8 @@ class ListUsers extends React.Component {
         this.setState({ selectedUser: id });
     }
     render () {
+        const { error } = this.state;
+        console.log('hit', error)
         if(this.state.selectedUser) {
             console.log("yessir!");
             return <Redirect to={`/users/${this.state.selectedUser}`} />
@@ -61,31 +77,30 @@ class ListUsers extends React.Component {
                 <div>
                     <ManageUsers />
                 </div>
-                <div>
-                    {
-                        users.map((user) => {
-                            return (
-                                <div
-                                    key={`${user.id}`}
-                                    onClick={() => this.handleClick(user.id)}
-                                >
-                                    <User user={user} />
-                                </div>
-                            );
-                        })
-                    }
-                </div>
+                {
+                    error && <ErrorComponent/>
+                }
+                {
+                    !error && (
+                        <div>
+                            {
+                                users.map((user) => {
+                                    return (
+                                        <div
+                                            key={`${user.id}`}
+                                            onClick={() => this.handleClick(user.id)}
+                                        >
+                                            <User user={user} />
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    )
+                }
             </div>
         );
     }
 }
 
 export default withRouter(ListUsers);
-
-// use link or normal div?
-// make some parts clickable
-/**
- * to={{
-                                    pathname: `/users/${user.id}`
-                                }}
- */
