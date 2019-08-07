@@ -44,6 +44,7 @@ class ListUsers extends React.Component {
         isFetching: false,
         data: [],
         error: false,
+        notFound: false,
     }
 
     componentDidMount() {
@@ -51,11 +52,12 @@ class ListUsers extends React.Component {
     }
 
     handleFetchingAgents = async () => {
-        const { error } = this.state;
-        const result = await fetchData('provider/GarbageCollectors//binit/agents');
-        const { errorMessage } = result;
-        errorMessage && this.setState({
-            error: !error
+        const { error, notFound } = this.state;
+        const result = await fetchData('provider/GarbageCollectors/binit/agents');
+        const { errorMessage, data } = result;
+        this.setState({
+            error: errorMessage && !error,
+            notFound: (data && data.agents.undefined) && !notFound
         })
     }
 
@@ -64,8 +66,7 @@ class ListUsers extends React.Component {
         this.setState({ selectedUser: id });
     }
     render () {
-        const { error } = this.state;
-        console.log('hit', error)
+        const { error, notFound } = this.state;
         if(this.state.selectedUser) {
             console.log("yessir!");
             return <Redirect to={`/users/${this.state.selectedUser}`} />
@@ -78,10 +79,10 @@ class ListUsers extends React.Component {
                     <ManageUsers />
                 </div>
                 {
-                    error && <ErrorComponent/>
+                    (notFound || error) && <ErrorComponent error={notFound}/>
                 }
                 {
-                    !error && (
+                    !(notFound || error) && (
                         <div>
                             {
                                 users.map((user) => {
