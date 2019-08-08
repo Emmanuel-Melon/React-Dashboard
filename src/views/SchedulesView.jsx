@@ -15,7 +15,6 @@ import CollectionParishes from "../schedules/CollectionParishes";
 import Completed from "../schedules/CompletedSchedulesSummary"
 import Upcoming from "../schedules/UpcomingSchedulesSummary"
 import Table from "../components/Tables/Table";
-import FilterSchedules from "../schedules/FilterSchedules";
 
 import {
     makeStyles,
@@ -55,9 +54,7 @@ export default function SchedulesView () {
                             </div>
                         </GridItem>
                     </GridContainer>
-                    <div>
-                        <FilterSchedules/>
-                    </div>
+
                     <div>
                         <Table
                             tableHeaderColor="primary"

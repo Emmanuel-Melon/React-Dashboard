@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         width: '100%',
+        background: "#fff",
+        padding: 16
     },
     ContactDetail: {
         borderRadius: 8,
