@@ -37,6 +37,7 @@ class App extends Component {
                     <Route exact path="/clients" component={ClientsView} />
                     <Route exact path="/schedules" component={SchedulesView} />
                     <Route exact path="/agents/:id" component={ProfileView} />
+                    <Route exact path="/clients/:id" component={ProfileView} />
                     <Route component={NotFoundView} />
                 </Switch>
                 <Footer/>
