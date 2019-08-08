@@ -61,7 +61,7 @@ export default function CollectionDays() {
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Friday"
+                    primary="Wednesday"
                     />
             </ListItem>
         </List>
