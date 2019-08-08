@@ -69,7 +69,7 @@ class ListUsers extends React.Component {
         const { error, notFound } = this.state;
         if(this.state.selectedUser) {
             console.log("yessir!");
-            return <Redirect to={`/users/${this.state.selectedUser}`} />
+            return <Redirect to={`/agents/${this.state.selectedUser}`} />
         }
         const { match } = this.props;
         console.log(match);
