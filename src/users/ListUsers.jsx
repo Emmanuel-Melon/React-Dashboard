@@ -105,11 +105,3 @@ class ListUsers extends React.Component {
 }
 
 export default withRouter(ListUsers);
-
-// use link or normal div?
-// make some parts clickable
-/**
- * to={{
-                                    pathname: `/users/${user.id}`
-                                }}
- */

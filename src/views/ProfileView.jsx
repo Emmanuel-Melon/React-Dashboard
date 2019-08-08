@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
  */
 import UserProfileCard from "../users/UserProfileCard";
 import UserUpcomingTaskSummary from "../users/UserUpcomingTaskSummary";
+import UserDocuments from "../users/UserDocuments";
+import UploadDocument from "../users/UploadDocument";
 
 import Button from '@material-ui/core/Button';
 
@@ -58,10 +60,14 @@ const ProfileView = ({ match }) => {
                     <UserProfileCard />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={4}>
-                    <UserProfileCard />
+                    <div>
+                        <UserDocuments/>
+                    </div>
+                    <div>
+                        <UploadDocument/>
+                    </div>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={4}>
-                    <UserUpcomingTaskSummary />
                     <UserUpcomingTaskSummary />
                 </GridItem>
             </GridContainer>
