@@ -9,7 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 
 const tableStyle = theme => ({
     infoTableHeader: {
-        color: "green"
+        color: "#333"
     },
     table: {
         marginBottom: "0",
