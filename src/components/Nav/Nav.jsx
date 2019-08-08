@@ -20,8 +20,9 @@ const Nav = () => {
           </div>
           <div className="navbar__links">
             <NavLink to="/">Home</NavLink>
+              <NavLink to="/agents">Agents</NavLink>
+              <NavLink to="/clients">Clients</NavLink>
             <NavLink to="/schedules">Schedules</NavLink>
-            <NavLink to="/users">Users</NavLink>
           </div>
       </div>
   )
