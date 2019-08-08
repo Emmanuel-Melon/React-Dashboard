@@ -16,7 +16,6 @@ import Nav from "./components/Nav/Nav";
  */
 import HomeView from "./views/HomeView";
 import ProfileView from "./views/ProfileView";
-import SettingsView from "./views/SettingsView";
 import UsersView from "./views/UsersView";
 import SchedulesView from "./views/SchedulesView";
 
@@ -30,7 +29,6 @@ class App extends Component {
                     <Nav />
                 </header>
                 <Route exact path="/" component={HomeView} />
-                <Route path="/settings" component={SettingsView} />
                 <Route exact path="/users" component={UsersView} />
                 <Route exact path="/schedules" component={SchedulesView} />
                 <Route exact path="/users/:id" component={ProfileView} />
