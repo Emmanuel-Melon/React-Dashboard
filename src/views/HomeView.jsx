@@ -9,7 +9,21 @@ import GridItem from "../components/Grid/GridItem";
 /**
  * core components
  */
+import Completed from "../schedules/CompletedSchedulesSummary";
 import Maps from "../components/Maps/Maps";
+import Upcoming from "../schedules/UpcomingSchedulesSummary";
+
+/**
+ * styles
+ */
+import {makeStyles} from '@material-ui/core/styles';
+const useStyles = makeStyles(theme => (
+    {
+        Content: {
+            marginBottom: 16
+        }
+    }
+));
 
 
 /**
@@ -17,15 +31,16 @@ import Maps from "../components/Maps/Maps";
  * @constructor
  */
 const HomeView = () => {
+    const classes = useStyles();
     return (
         <div>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={4} lg={4}>
-                    <div>
-                        <h3>Upcoming</h3>
+                    <div className={classes.Content}>
+                        <Upcoming/>
                     </div>
-                    <div>
-                        <h3>Completed</h3>
+                    <div  className={classes.Content}>
+                        <Completed />
                     </div>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={8} lg={8}>
