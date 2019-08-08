@@ -16,10 +16,12 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 
 const useStyles = makeStyles(theme => ({
     avatar: {
-      background: "orange"
+        background: "#81C784"
     },
     root: {
         width: '100%',
+        background: "#fff",
+        padding: 16
     },
     ContactDetail: {
         borderRadius: 8,
@@ -31,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function FolderList() {
+export default function UserDocuments() {
     const classes = useStyles();
 
     return (
@@ -39,7 +41,7 @@ export default function FolderList() {
             className={classes.root}
             subheader={
                 <ListSubheader component="div" id="nested-list-subheader">
-                    Contact Info
+                    Personal Documents
                 </ListSubheader>
             }
         >

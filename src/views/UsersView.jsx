@@ -5,6 +5,7 @@ import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
 
 import ListUsers from "../users/ListUsers";
+import FilterUsers from "../users/FilterUsers";
 
 
 // communicating to a parent via an event?
@@ -44,10 +45,10 @@ class UsersView extends React.Component {
         return (
                 <div>
                     <GridContainer>
-                        <GridItem xs={12} sm={12} md={12} lg={4}>
-                            <h3>Manage Users</h3>
+                        <GridItem xs={12} sm={12} md={12} lg={5}>
+                            <FilterUsers />
                         </GridItem>
-                        <GridItem xs={12} sm={12} md={12} lg={8}>
+                        <GridItem xs={12} sm={12} md={12} lg={7}>
                             <div>
                                 <ListUsers />
                             </div>
