@@ -16,6 +16,7 @@ import Nav from "./components/Nav/Nav";
  * views
  */
 import AgentsView from "./views/AgentsView";
+import ClientsView from "./views/ClientsView";
 import HomeView from "./views/HomeView";
 import NotFoundView from "./views/NotFoundView";
 import ProfileView from "./views/ProfileView";
@@ -33,6 +34,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={HomeView} />
                     <Route exact path="/agents" component={AgentsView} />
+                    <Route exact path="/clients" component={ClientsView} />
                     <Route exact path="/schedules" component={SchedulesView} />
                     <Route exact path="/agents/:id" component={ProfileView} />
                     <Route component={NotFoundView} />
