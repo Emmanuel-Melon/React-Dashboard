@@ -9,6 +9,7 @@ import GridItem from "../components/Grid/GridItem";
 /**
  * core components
  */
+import AddSchedule from "../schedules/AddSchedule";
 import CollectionDays from "../schedules/CollectionDays";
 import CollectionParishes from "../schedules/CollectionParishes";
 import Completed from "../schedules/CompletedSchedulesSummary"
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function AddSchedule () {
+export default function SchedulesView () {
     const classes = useStyles();
     return (
         <div>
@@ -33,6 +34,9 @@ export default function AddSchedule () {
                 <GridItem xs={12} sm={12} md={4} lg={4}>
                     <div>
                         <CollectionDays />
+                    </div>
+                    <div>
+                        <AddSchedule />
                     </div>
                     <div>
                         <CollectionParishes />
