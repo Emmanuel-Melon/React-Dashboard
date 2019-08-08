@@ -4,8 +4,8 @@ import { BrowserRouter as Router, withRouter, NavLink } from "react-router-dom";
 import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
 
-import ListUsers from "../users/ListUsers";
-import FilterUsers from "../users/FilterUsers";
+import ListUsers from "../agents/ListUsers";
+import FilterUsers from "../agents/FilterUsers";
 
 
 // communicating to a parent via an event?
