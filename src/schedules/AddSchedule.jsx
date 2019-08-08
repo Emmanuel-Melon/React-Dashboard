@@ -52,7 +52,7 @@ export default function FolderList() {
                 </IconButton>
             </div>
             <div className={classes.ActionDiv}>
-                <Typography variant={"h5"} className={classes.Action}>Add Picking Day</Typography>
+                <Typography variant={"h5"} className={classes.Action}>Add a Picking Day</Typography>
             </div>
         </div>
     );
