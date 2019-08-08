@@ -4,8 +4,8 @@
 import React from "react";
 import { withRouter, NavLink, Redirect } from "react-router-dom";
 
-import User from "./UserOverview";
-import ManageUsers from "./ManageUsers";
+import Agent from "./AgentOverview";
+import ManageAgents from "./ManageAgents";
 
 import fetchData from '../services/api';
 import ErrorComponent from "../components/Error/ErrorComponent";
@@ -76,7 +76,7 @@ class ListUsers extends React.Component {
         return (
             <div>
                 <div>
-                    <ManageUsers />
+                    <ManageAgents />
                 </div>
                 {
                     (notFound || error) && <ErrorComponent error={notFound}/>
@@ -91,7 +91,7 @@ class ListUsers extends React.Component {
                                             key={`${user.id}`}
                                             onClick={() => this.handleClick(user.id)}
                                         >
-                                            <User user={user} />
+                                            <Agent user={user} />
                                         </div>
                                     );
                                 })

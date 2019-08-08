@@ -4,8 +4,8 @@ import { BrowserRouter as Router, withRouter, NavLink } from "react-router-dom";
 import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
 
-import ListUsers from "../agents/ListUsers";
-import FilterUsers from "../agents/FilterUsers";
+import ListAgents from "../agents/ListAgents";
+import FilterAgents from "../agents/FilterAgents";
 
 
 // communicating to a parent via an event?
@@ -46,11 +46,11 @@ class UsersView extends React.Component {
                 <div>
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={12} lg={5}>
-                            <FilterUsers />
+                            <FilterAgents />
                         </GridItem>
                         <GridItem xs={12} sm={12} md={12} lg={7}>
                             <div>
-                                <ListUsers />
+                                <ListAgents />
                             </div>
                         </GridItem>
                     </GridContainer>

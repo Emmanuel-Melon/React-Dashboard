@@ -11,8 +11,8 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-import UserContactInfo from "./UserContactInfo";
-import UserDataSummary from "./UserDataSummary";
+import AgentContactInfo from "./AgentContactInfo";
+import AgentDataSummary from "./AgentDataSummary";
 
 const useStyles = makeStyles(theme => (
     {
@@ -53,8 +53,8 @@ export default function UserProfileCard() {
                         Emmanuel Gabriel <span className={classes.title}>(Collector)</span>
                     </Typography>
 
-                    <UserDataSummary/>
-                    <UserContactInfo/>
+                    <AgentDataSummary/>
+                    <AgentContactInfo/>
                 </CardContent>
 
         </Card>
