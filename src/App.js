@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Switch
 } from "react-router-dom";
 
 /**
@@ -15,6 +16,7 @@ import Nav from "./components/Nav/Nav";
  * views
  */
 import HomeView from "./views/HomeView";
+import NotFoundView from "./views/NotFoundView";
 import ProfileView from "./views/ProfileView";
 import UsersView from "./views/UsersView";
 import SchedulesView from "./views/SchedulesView";
@@ -28,10 +30,13 @@ class App extends Component {
                 <header>
                     <Nav />
                 </header>
-                <Route exact path="/" component={HomeView} />
-                <Route exact path="/users" component={UsersView} />
-                <Route exact path="/schedules" component={SchedulesView} />
-                <Route exact path="/users/:id" component={ProfileView} />
+                <Switch>
+                    <Route exact path="/" component={HomeView} />
+                    <Route exact path="/users" component={UsersView} />
+                    <Route exact path="/schedules" component={SchedulesView} />
+                    <Route exact path="/users/:id" component={ProfileView} />
+                    <Route component={NotFoundView} />
+                </Switch>
                 <Footer/>
             </div>
         </Router>
