@@ -14,6 +14,8 @@ import Typgoraphy from "@material-ui/core/Typography";
 /**
  * core components
  */
+import ClientOverview from "../clients/ClientOverview";
+import ListClients from "../clients/ListClients";
 
 /**
  * styles
@@ -21,15 +23,12 @@ import Typgoraphy from "@material-ui/core/Typography";
 import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => (
     {
-        Content: {
-            marginBottom: 16
-        },
         Wrapper: {
+            marginBottom: 16,
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            height: "100%"
-        }
+            alignItems: "center"
+        },
     }
 ));
 
@@ -42,11 +41,23 @@ const NotFoundView = () => {
     const classes = useStyles();
     return (
         <div className={classes.Wrapper}>
-            <div className={classes.Content}>
-                <Typgoraphy variant={"h1"}>
-                    List Clients
-                </Typgoraphy>
-            </div>
+            <GridContainer>
+                <GridItem xs={12} sm={12} md={3} lg={3}>
+                    <Typgoraphy variant={"h5"}>
+                        My Clients
+                    </Typgoraphy>
+                    <Typgoraphy variant={"body1"}>
+                        This tab will let you keep track of your clients and their profiles.
+                    </Typgoraphy>
+
+                </GridItem>
+                <GridItem xs={12} sm={12} md={9} lg={9}>
+                    <Typgoraphy variant={"h3"}>
+                        My Clients
+                    </Typgoraphy>
+                    <ListClients />
+                </GridItem>
+            </GridContainer>
         </div>
     )
 };
