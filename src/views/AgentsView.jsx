@@ -45,10 +45,10 @@ class UsersView extends React.Component {
         return (
                 <div>
                     <GridContainer>
-                        <GridItem xs={12} sm={12} md={12} lg={5}>
+                        <GridItem xs={12} sm={12} md={3} lg={3}>
                             <FilterAgents />
                         </GridItem>
-                        <GridItem xs={12} sm={12} md={12} lg={7}>
+                        <GridItem xs={12} sm={12} md={3} lg={9}>
                             <div>
                                 <ListAgents />
                             </div>
