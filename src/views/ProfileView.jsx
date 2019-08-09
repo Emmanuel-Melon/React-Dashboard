@@ -14,7 +14,7 @@ import AgentDocuments from "../agents/AgentDocuments";
 import UploadDocument from "../agents/UploadDocument";
 
 import Button from '@material-ui/core/Button';
-
+import Greeting from "../components/Greetings/Greetings";
 /**
  * styles
  */
@@ -41,6 +41,7 @@ const ProfileView = ({ match }) => {
     const classes = useStyles();
     return (
         <div className={classes.Profile}>
+
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12} lg={12} className={classes.Menu}>
                     <div>

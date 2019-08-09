@@ -20,7 +20,7 @@ import {
     makeStyles,
     Typography
 } from "@material-ui/core";
-
+import Greeting from "../components/Greetings/Greetings";
 const useStyles = makeStyles({
 
 });
@@ -29,6 +29,9 @@ export default function SchedulesView () {
     const classes = useStyles();
     return (
         <div>
+            <div>
+                <Greeting/>
+            </div>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={4} lg={4}>
                     <div>
