@@ -62,7 +62,11 @@ class Firebase {
 
 // what's this default value?
 const FirebaseContext = React.createContext(null);
+const FirebaseConsumer = FirebaseContext.Consumer;
 const FirebaseProvider = FirebaseContext.Provider;
 
 export default Firebase;
-export { FirebaseProvider };
+export {
+    FirebaseConsumer,
+    FirebaseProvider
+};
