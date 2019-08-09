@@ -16,7 +16,7 @@ import Typgoraphy from "@material-ui/core/Typography";
  */
 import ClientOverview from "../clients/ClientOverview";
 import ListClients from "../clients/ListClients";
-
+import Greeting from "../components/Greetings/Greetings";
 /**
  * styles
  */
@@ -40,7 +40,10 @@ const useStyles = makeStyles(theme => (
 const NotFoundView = () => {
     const classes = useStyles();
     return (
-        <div className={classes.Wrapper}>
+        <div>
+            <div>
+                <Greeting/>
+            </div>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={3} lg={3}>
                     <Typgoraphy variant={"h5"}>

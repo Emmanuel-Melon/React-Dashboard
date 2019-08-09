@@ -6,7 +6,7 @@ import GridItem from "../components/Grid/GridItem";
 
 import ListAgents from "../agents/ListAgents";
 import FilterAgents from "../agents/FilterAgents";
-
+import Greeting from "../components/Greetings/Greetings";
 
 // communicating to a parent via an event?
 // sounds like a plan?
@@ -44,6 +44,9 @@ class UsersView extends React.Component {
         const { match } = this.props;
         return (
                 <div>
+                    <div>
+                        <Greeting/>
+                    </div>
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={3} lg={3}>
                             <FilterAgents />

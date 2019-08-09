@@ -12,7 +12,7 @@ import GridItem from "../components/Grid/GridItem";
 import Completed from "../schedules/CompletedSchedulesSummary";
 import Maps from "../components/Maps/Maps";
 import Upcoming from "../schedules/UpcomingSchedulesSummary";
-
+import Greeting from "../components/Greetings/Greetings";
 /**
  * styles
  */
@@ -34,6 +34,9 @@ const HomeView = () => {
     const classes = useStyles();
     return (
         <div>
+            <div>
+                <Greeting/>
+            </div>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={4} lg={4}>
                     <div className={classes.Content}>
