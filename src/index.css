@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   background: #EEEEEE;
   margin: 0;
   padding: 0;
@@ -11,6 +12,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }
 
 code {

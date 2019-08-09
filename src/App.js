@@ -22,6 +22,11 @@ import NotFoundView from "./views/NotFoundView";
 import ProfileView from "./views/ProfileView";
 import SchedulesView from "./views/SchedulesView";
 
+/**
+ * styles
+ */
+import "./App.css";
+
 
 class App extends Component {
   render() {
@@ -31,16 +36,20 @@ class App extends Component {
                 <header>
                     <Nav />
                 </header>
-                <Switch>
-                    <Route exact path="/" component={HomeView} />
-                    <Route exact path="/agents" component={AgentsView} />
-                    <Route exact path="/clients" component={ClientsView} />
-                    <Route exact path="/schedules" component={SchedulesView} />
-                    <Route exact path="/agents/:id" component={ProfileView} />
-                    <Route exact path="/clients/:id" component={ProfileView} />
-                    <Route component={NotFoundView} />
-                </Switch>
-                <Footer/>
+                <main>
+                    <Switch>
+                        <Route exact path="/" component={HomeView} />
+                        <Route exact path="/agents" component={AgentsView} />
+                        <Route exact path="/clients" component={ClientsView} />
+                        <Route exact path="/schedules" component={SchedulesView} />
+                        <Route exact path="/agents/:id" component={ProfileView} />
+                        <Route exact path="/clients/:id" component={ProfileView} />
+                        <Route component={NotFoundView} />
+                    </Switch>
+                </main>
+                <footer>
+                    <Footer/>
+                </footer>
             </div>
         </Router>
     );
