@@ -38,35 +38,11 @@ const users = [
         title: "Garbage Collector"
     },
     {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
+        avatar: "https://banner2.kisspng.com/20180626/fhs/kisspng-avatar-user-computer-icons-software-developer-5b327cc98b5780.5684824215300354015708.jpg",
         id: 4,
         name: "Vibm Mayanja",
         title: "Garbage Collector"
     },
-    {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
-        id: 4,
-        name: "Vibm Mayanja",
-        title: "Garbage Collector"
-    },
-    {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
-        id: 4,
-        name: "Vibm Mayanja",
-        title: "Garbage Collector"
-    },
-    {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
-        id: 4,
-        name: "Vibm Mayanja",
-        title: "Garbage Collector"
-    },
-    {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
-        id: 4,
-        name: "Vibm Mayanja",
-        title: "Garbage Collector"
-    }
 ];
 
 
@@ -89,7 +65,7 @@ class ListClients extends React.Component {
         const { errorMessage, data } = result;
         this.setState({
             error: errorMessage && !error,
-            notFound: (data && data.agents.undefined) && !notFound
+            notFound: (data && data.clients.undefined) && !notFound
         })
     }
 
@@ -100,7 +76,6 @@ class ListClients extends React.Component {
     render () {
         const { error, notFound } = this.state;
         if(this.state.selectedUser) {
-            console.log("yessir!");
             return <Redirect to={`/clients/${this.state.selectedUser}`} />
         }
         const { classes, match } = this.props;

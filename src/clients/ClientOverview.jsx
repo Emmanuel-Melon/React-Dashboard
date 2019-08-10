@@ -7,11 +7,35 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Avatar from "@material-ui/core/Avatar";
+
+import AgentDataSummary from "../agents/AgentDataSummary";
 
 const useStyles = makeStyles({
+    AvatarArea: {
+        background: "#e08c05",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16
+    },
+    Avatar: {
+        width: 80,
+        height: 80,
+        border: "solid 0.1em #333"
+    },
+    Button: {
+      background: "#e08c05",
+        color: "#fff",
+        "&:hover": {
+            background: "#e08c05",
+        }
+    },
     card: {
-        maxWidth: 345,
-        margin: 16
+        borderBottom: "solid 0.3em #e08c05",
+        width: 345,
+        margin: 8,
+
     },
 });
 
@@ -21,28 +45,28 @@ export default function ClientOverview(props) {
     return (
         <Card className={classes.card}>
             <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image={user.avatar}
-                    title="Contemplative Reptile"
-                />
+                <div className={classes.AvatarArea}>
+                    <Avatar
+                        className={classes.Avatar}
+                        src={user.avatar}
+                    />
+                </div>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Client
+                        {user.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-                    </Typography>
+                    <AgentDataSummary/>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button className={classes.Button}>
                     View Profile
                 </Button>
             </CardActions>
         </Card>
     );
 }
+
+// try giving the greeting component some border
+// try adding that menu thing at the top to modify someone's information
+// delete or udpate
