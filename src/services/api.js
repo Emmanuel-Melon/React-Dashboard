@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: 'https://us-central1-yonja-777.cloudfunctions.net/yonja_api/v1.0/',
   responseType: 'json',
   headers: {
-    'Authorization': `${'token'}`
+    'Authorization': localStorage.getItem('Authorization')
   },
 });
 

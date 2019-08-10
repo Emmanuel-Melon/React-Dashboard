@@ -28,8 +28,6 @@ import SchedulesView from "./views/SchedulesView";
  * styles
  */
 import "./App.css";
-import SettingsView from "./views/SettingsView";
-import UsersView from "./views/UsersView";
 import RegisterUser from './views/Auth/RegistrationView';
 
 

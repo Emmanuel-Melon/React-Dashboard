@@ -15,6 +15,14 @@
   .MuiTextField-root {
     width: 135%;
   }
+
+  &__error {
+    background-color: rgb(240, 140, 140);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 10px;
+    padding: 10px;
+  }
 }
 
 @media (max-width: 600px) {
