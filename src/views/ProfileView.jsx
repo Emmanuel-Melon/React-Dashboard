@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography';
 /**
  * core components
  */
-import UserProfileCard from "../users/UserProfileCard";
-import UserUpcomingTaskSummary from "../users/UserUpcomingTaskSummary";
-import UserDocuments from "../users/UserDocuments";
-import UploadDocument from "../users/UploadDocument";
+import AgentProfileCard from "../agents/AgentProfileCard";
+import AgentUpcomingTaskSummary from "../agents/AgentUpcomingTaskSummary";
+import AgentDocuments from "../agents/AgentDocuments";
+import UploadDocument from "../agents/UploadDocument";
 
 import Button from '@material-ui/core/Button';
-
+import Greeting from "../components/Greetings/Greetings";
 /**
  * styles
  */
@@ -41,6 +41,7 @@ const ProfileView = ({ match }) => {
     const classes = useStyles();
     return (
         <div className={classes.Profile}>
+
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12} lg={12} className={classes.Menu}>
                     <div>
@@ -57,18 +58,18 @@ const ProfileView = ({ match }) => {
             </GridContainer>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12} lg={4}>
-                    <UserProfileCard />
+                    <AgentProfileCard />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={4}>
                     <div>
-                        <UserDocuments/>
+                        <AgentDocuments/>
                     </div>
                     <div>
                         <UploadDocument/>
                     </div>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12} lg={4}>
-                    <UserUpcomingTaskSummary />
+                    <AgentUpcomingTaskSummary />
                 </GridItem>
             </GridContainer>
         </div>

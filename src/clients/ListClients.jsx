@@ -2,13 +2,21 @@
 // look at using component thumbnail as links
 // also link vs nav link
 import React from "react";
-import { withRouter, NavLink, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
-import User from "./UserOverview";
-import ManageUsers from "./ManageUsers";
+import ClientOverview from "./ClientOverview";
 
 import fetchData from '../services/api';
 import ErrorComponent from "../components/Error/ErrorComponent";
+
+import { compose } from "recompose";
+import { withStyles } from "@material-ui/core";
+const styles = theme => ({
+   Clients: {
+       display: "flex",
+       flexWrap: "wrap"
+   }
+});
 
 const users = [
     {
@@ -30,15 +38,15 @@ const users = [
         title: "Garbage Collector"
     },
     {
-        avatar: "https://www.pngarts.com/files/3/Employee-Avatar-PNG-Free-Download.png",
+        avatar: "https://banner2.kisspng.com/20180626/fhs/kisspng-avatar-user-computer-icons-software-developer-5b327cc98b5780.5684824215300354015708.jpg",
         id: 4,
         name: "Vibm Mayanja",
         title: "Garbage Collector"
-    }
+    },
 ];
 
 
-class ListUsers extends React.Component {
+class ListClients extends React.Component {
     state = {
         selectedUser: null,
         isFetching: false,
@@ -48,7 +56,7 @@ class ListUsers extends React.Component {
     }
 
     componentDidMount() {
-        this.handleFetchingAgents();
+        // this.handleFetchingAgents();
     }
 
     handleFetchingAgents = async () => {
@@ -57,7 +65,7 @@ class ListUsers extends React.Component {
         const { errorMessage, data } = result;
         this.setState({
             error: errorMessage && !error,
-            notFound: (data && data.agents.undefined) && !notFound
+            notFound: (data && data.clients.undefined) && !notFound
         })
     }
 
@@ -68,22 +76,17 @@ class ListUsers extends React.Component {
     render () {
         const { error, notFound } = this.state;
         if(this.state.selectedUser) {
-            console.log("yessir!");
-            return <Redirect to={`/users/${this.state.selectedUser}`} />
+            return <Redirect to={`/clients/${this.state.selectedUser}`} />
         }
-        const { match } = this.props;
-        console.log(match);
+        const { classes, match } = this.props;
         return (
             <div>
-                <div>
-                    <ManageUsers />
-                </div>
                 {
                     (notFound || error) && <ErrorComponent error={notFound}/>
                 }
                 {
                     !(notFound || error) && (
-                        <div>
+                        <div className={classes.Clients}>
                             {
                                 users.map((user) => {
                                     return (
@@ -91,7 +94,7 @@ class ListUsers extends React.Component {
                                             key={`${user.id}`}
                                             onClick={() => this.handleClick(user.id)}
                                         >
-                                            <User user={user} />
+                                            <ClientOverview user={user} />
                                         </div>
                                     );
                                 })
@@ -104,4 +107,7 @@ class ListUsers extends React.Component {
     }
 }
 
-export default withRouter(ListUsers);
+export default compose(
+    withRouter,
+    withStyles(styles)
+)(ListClients);

@@ -14,7 +14,7 @@ import CalendarIcon from '@material-ui/icons/Event';
 
 const useStyles = makeStyles(theme => ({
     avatar: {
-        background: "orange"
+        background: "#e08c05"
     },
     root: {
         width: '100%',

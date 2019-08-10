@@ -8,15 +8,13 @@ const useStyles = makeStyles(theme => ({
     fontSize: 80,
   },
 }));
-const ErrorComponent = (errorBool) => {
+const ErrorComponent = (error) => {
   const classes = useStyles();
-  const { error } = errorBool;
+
   return (
     <div className="error">
-      <div className="error__icon">
-        <Warning className={classes.icon}/>
-      </div>
-      <span className="error__message">{error ? 'No entry has been added' : 'Error occured while fetching data'}</span>
+      <Warning className={classes.icon}/>
+      <span className="error__message">Error occurred while fetching data</span>
     </div>
   )
 }

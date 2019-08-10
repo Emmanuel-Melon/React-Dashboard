@@ -14,7 +14,7 @@ import ImageIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
     Action: {
-      color: "orange"
+      color: "#e08c05"
     },
     root: {
         width: '100%',
@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     ActionDiv: {
         flex: 2,
         display: "flex",
-        justifyContent: "center",
         alignItems: "center"
     },
     Icon: {
