@@ -35,13 +35,15 @@ class LogoutButton extends Component {
         this.state = {
             clicked: false
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     async handleClick () {
         try {
-            const user = await this.props.firebase.doSignOut();
+            await this.props.firebase.doSignOut();
+            this.props.history.push("/");
         } catch (e) {
-
+            this.props.history.push("/landing");
         }
     }
 
