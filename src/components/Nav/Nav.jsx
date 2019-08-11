@@ -7,50 +7,13 @@ import './Nav.scss';
  */
 import { AuthConsumer } from "../../services/auth";
 
-import Logout from "../Auth/Logout";
-
-const AuthNav = () => {
-    return (
-        <div>
-            <ul>
-                <li><button>Logout</button></li>
-            </ul>
-        </div>
-    )
-};
-
-const NoAuthNav = () => {
-    return (
-        <div>
-            <ul>
-                <li><button>Logout</button></li>
-            </ul>
-        </div>
-    )
-};
-
 /**
  *
  * @return {*}
  * @constructor
  */
 class Nav extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            isAuthenticated: false
-        }
-
-    }
-
-    componentDidMount() {
-
-    }
-
-
     render () {
-        console.log(this.props);
         return (
             <AuthConsumer>
                 { authUser => {
