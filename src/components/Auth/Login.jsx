@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
-
+import withFirebase from "../../HOCs/withFirebase";
+import Spinner from "../Spinners/Spinner";
 
 /**
  * @material-ui/core
@@ -80,15 +81,10 @@ class LoginForm extends Component {
     handleFormSubmit = async event => {
         event.preventDefault();
         this.setState({ isLoading: true });
-        console.log(this.state);
-        console.log("trying to access authUser via context");
-        console.log(this.props);
-        // TODO: initiate firebase action
         try {
-            // let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
-           // console.log(authUser);
-            // let loggedUser = localStorage.setItem("Authorization", authUser.user.ra);
-            // console.log(loggedUser);
+            let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
+           console.log(authUser);
+            this.setState({ isLoading: false });
             this.props.history.push("/");
 
         } catch (e) {
@@ -101,6 +97,10 @@ class LoginForm extends Component {
     };
     render () {
         const { classes } = this.props;
+
+        if(this.state.isLoading === true ) {
+            return <Spinner />
+        }
         return (
             <div className={classes.Form}>
                 <div>
@@ -153,6 +153,7 @@ class LoginForm extends Component {
 }
 
 export default compose(
+    withFirebase,
     withRouter,
     withStyles(loginStyles)
 )(LoginForm);
