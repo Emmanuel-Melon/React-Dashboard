@@ -6,15 +6,19 @@ import './ErrorComponent.scss';
 const useStyles = makeStyles(theme => ({
   icon: {
     fontSize: 80,
+    color: "#FF7043",
   },
 }));
-const ErrorComponent = (error) => {
+const ErrorComponent = (props) => {
   const classes = useStyles();
+  const { message } = props;
 
   return (
     <div className="error">
-      <Warning className={classes.icon}/>
-      <span className="error__message">Error occurred while fetching data</span>
+      <div className="error__icon">
+        <Warning className={classes.icon}/>
+      </div>
+      <span className="error__message">{message}</span>
     </div>
   )
 }

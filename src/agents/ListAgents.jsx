@@ -27,10 +27,10 @@ class ListUsers extends React.Component {
         this.setState({ isFetching: true });
         const { error, notFound } = this.state;
         const result = await fetchData('provider/GarbageCollectors/homeklin/agents');
-        const { errorMessage, data } = result;
-        let { agents } = data;
+        const { errorMessage, data = {} } = result;
+        let { agents = [] } = data;
         agents = _.values(agents);
-        console.table(agents);
+        console.log("TCL: ListUsers -> handleFetchingAgents -> agents", agents)
         this.setState({
             agents,
             error: errorMessage && !error,
@@ -52,6 +52,14 @@ class ListUsers extends React.Component {
             return (
                 <Spinner/>
             );
+        }
+
+        if (error) {
+            return <ErrorComponent message='Data could not be fetched...'/>
+        }
+
+        if (notFound) {
+            return <ErrorComponent message='No agents added yet...'/>
         }
         return (
             <div>
