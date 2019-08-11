@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 
-/**
- * material-ui/core
- */
-import { Button }from "@material-ui/core";
-
-/**
- * HOCs
- */
-import withFirebase from "../../HOCs/withFirebase";
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom";
+import { Button }from "@material-ui/core";
 
 /**
  * styles
@@ -28,6 +20,8 @@ const logoutStyles = theme => ({
 
 });
 
+
+
 class LogoutButton extends Component {
 
     constructor (props) {
@@ -38,13 +32,9 @@ class LogoutButton extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    async handleClick () {
-        try {
-            await this.props.firebase.doSignOut();
-            this.props.history.push("/");
-        } catch (e) {
-            this.props.history.push("/landing");
-        }
+    handleClick () {
+        // this.props.firebase.doSignOut();
+        this.props.history.push("/landing");
     }
 
     render () {
@@ -60,7 +50,6 @@ class LogoutButton extends Component {
 }
 
 export default compose(
-    withFirebase,
     withRouter,
     withStyles(logoutStyles)
 )(LogoutButton);
