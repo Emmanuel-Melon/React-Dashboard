@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 
+/**
+ * material-ui/core
+ */
 import {
     BrowserRouter as Router,
     Route,
     Switch
 } from "react-router-dom";
+
+/**
+ * HOCs
+ */
+import withAuthentication from "./HOCs/withAuthentication";
 
 /**
  * core components
@@ -62,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuthentication(App);
