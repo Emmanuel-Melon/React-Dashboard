@@ -28,6 +28,7 @@ import SchedulesView from "./views/SchedulesView";
  * styles
  */
 import "./App.css";
+import RegisterUser from './views/Auth/RegistrationView';
 
 
 class App extends Component {
@@ -48,6 +49,7 @@ class App extends Component {
                         <Route exact path="/schedules" component={SchedulesView} />
                         <Route exact path="/agents/:id" component={ProfileView} />
                         <Route exact path="/clients/:id" component={ProfileView} />
+                        <Route exact path="/register" component={RegisterUser} />
                         <Route component={NotFoundView} />
                     </Switch>
                 </main>
