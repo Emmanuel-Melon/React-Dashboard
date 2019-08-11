@@ -56,13 +56,21 @@ const styles = theme => ({
 });
 
 class User extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            avatar: "http://www.learnex.in/wp-content/uploads/2015/12/flat-faces-icons-circle-6.png",
+            trips: 0
+        }
+    }
     render () {
         const { classes, match, user } = this.props;
         return (
             <Paper className={classes.Employee}>
                 <div className={classes.EmployeeInfo}>
                     <Avatar
-                        src={user.avatar}
+                        src={user.avatar || this.state.avatar}
                         alt={user.name}
                         className={classes.avatar}
                     />
@@ -81,7 +89,7 @@ class User extends React.Component{
                     <div className={classes.EmployeeStatsContent}>
                         <div>
                             <Typography variant="h6">
-                                35996
+                                {this.state.trips}
                             </Typography>
                         </div>
                         <div>
