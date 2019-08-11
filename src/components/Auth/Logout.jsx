@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 
 /**
  * material-ui/core
@@ -10,7 +11,6 @@ import { Button }from "@material-ui/core";
  */
 import withFirebase from "../../HOCs/withFirebase";
 import { compose } from "recompose";
-import { withRouter } from "react-router-dom";
 
 /**
  * styles
