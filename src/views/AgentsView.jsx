@@ -77,8 +77,8 @@ class AgentsView extends React.Component {
                             <Button onClick={this.createAgent} className={classes.Button}>Create an Agent</Button>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={9} lg={9}>
-                            <Typography variant={"h3"}>
-                                Agents
+                            <Typography variant={"h5"}>
+                                My Agents
                             </Typography>
                             <ListAgents />
                         </GridItem>
