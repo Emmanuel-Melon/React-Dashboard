@@ -1,13 +1,23 @@
 import React from "react";
 import { withRouter, Redirect } from "react-router-dom";
 
-import Agent from "./AgentOverview";
+import ClientOverview from '../clients/ClientOverview';
 import ManageAgents from "./ManageAgents";
 
 import fetchData from '../services/api';
 import ErrorComponent from "../components/Error/ErrorComponent";
 import _ from "lodash";
 import Spinner from "../components/Spinners/Spinner";
+import { compose } from "recompose";
+import { withStyles } from "@material-ui/core";
+
+
+const styles = theme => ({
+   Agents: {
+       display: "flex",
+       flexWrap: "wrap"
+   }
+});
 
 
 class ListUsers extends React.Component {
@@ -44,6 +54,8 @@ class ListUsers extends React.Component {
     }
     render () {
         const { error, notFound } = this.state;
+        const { classes } = this.props;
+
         if(this.state.selectedUser) {
             return <Redirect to={`/agents/${this.state.selectedUser}`} />
         }
@@ -63,15 +75,12 @@ class ListUsers extends React.Component {
         }
         return (
             <div>
-                <div>
-                    <ManageAgents />
-                </div>
                 {
                     (notFound || error) && <ErrorComponent error={notFound}/>
                 }
                 {
                     !(notFound || error) && (
-                        <div>
+                        <div className={classes.Agents}>
                             {
                                 this.state.agents.map((user) => {
                                     return (
@@ -79,7 +88,7 @@ class ListUsers extends React.Component {
                                             key={`${user.id}`}
                                             onClick={() => this.handleClick(user.id)}
                                         >
-                                            <Agent user={user} />
+                                            <ClientOverview user={user} />
                                         </div>
                                     );
                                 })
@@ -92,4 +101,7 @@ class ListUsers extends React.Component {
     }
 }
 
-export default withRouter(ListUsers);
+export default compose(
+    withRouter,
+    withStyles(styles)
+)(ListUsers);

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, withRouter, NavLink } from "react-router-dom";
 import { compose } from "recompose";
 import privateRoute from "../HOCs/PrivateRoute";
 
+import Typgoraphy from "@material-ui/core/Typography";
 
 import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
@@ -37,10 +38,11 @@ class AgentsView extends React.Component {
                         <GridItem xs={12} sm={12} md={3} lg={3}>
                             <FilterAgents />
                         </GridItem>
-                        <GridItem xs={12} sm={12} md={3} lg={9}>
-                            <div>
-                                <ListAgents />
-                            </div>
+                        <GridItem xs={12} sm={12} md={9} lg={9}>
+                            <Typgoraphy variant={"h3"}>
+                                Agents
+                            </Typgoraphy>
+                            <ListAgents />
                         </GridItem>
                     </GridContainer>
                 </div>
