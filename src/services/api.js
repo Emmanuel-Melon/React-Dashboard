@@ -27,6 +27,25 @@ const fetchData = (endpoint) => {
       errorMessage: 'Error occured'
     }
   })
-}
+};
+
+const postData = (endpoint, data) => {
+  return axiosInstance.post(endpoint, data).then(res => {
+    return {
+      data: res.data,
+      status: res.status
+    }
+  }).catch((err) => {
+    return {
+      err,
+      errorMessage: 'Error occured'
+    }
+  })
+};
 
 export default fetchData;
+
+export {
+  fetchData,
+  postData
+}
