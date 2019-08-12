@@ -43,12 +43,10 @@ const loginStyles = theme => ({
         margin: 8
     },
     FormControl: {
-        display: "block",
-        width: "50%",
+        width: "65%",
         margin: 8
     },
     Form: {
-        background: "#fff",
         padding: 8,
         width: "90%",
         display: "flex",
@@ -96,6 +94,7 @@ class AddAgent extends Component {
             agent = _.omit(agent, "error");
             let user = await postData("agents/register", agent);
             console.log(user);
+            this.props.history.push("/agents");
         } catch (e) {
             console.log(e);
             this.setState({ error: e });

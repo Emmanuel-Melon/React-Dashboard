@@ -25,6 +25,28 @@ import ListAgents from "../agents/ListAgents";
 import FilterAgents from "../agents/FilterAgents";
 import Greeting from "../components/Greetings/Greetings";
 
+/**
+ * styles
+ */
+import { withStyles } from "@material-ui/core";
+
+const styles = theme => (
+    {
+        Content: {
+            marginBottom: 16,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        Button: {
+            background: "#FEA30D",
+            width: "100%",
+            marginTop: 8
+        }
+    }
+);
+
+
 class AgentsView extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +65,7 @@ class AgentsView extends React.Component {
         this.props.history.push(`/agents/create`);
     }
     render() {
-        const { match } = this.props;
+        const { classes, match } = this.props;
         return (
                 <div>
                     <div>
@@ -52,7 +74,7 @@ class AgentsView extends React.Component {
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={3} lg={3}>
                             <FilterAgents />
-                            <Button onClick={this.createAgent}>Create Agent</Button>
+                            <Button onClick={this.createAgent} className={classes.Button}>Create an Agent</Button>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={9} lg={9}>
                             <Typography variant={"h3"}>
@@ -68,6 +90,7 @@ class AgentsView extends React.Component {
 
 export default compose(
     privateRoute,
-    withRouter
+    withRouter,
+    withStyles(styles)
 )(AgentsView);
 
