@@ -1,6 +1,13 @@
 import React from "react";
 
 /**
+ * HOCs
+ */
+import { compose } from "recompose";
+import privateRoute from "../HOCs/PrivateRoute";
+
+
+/**
  * grid
  */
 import GridContainer from "../components/Grid/GridContianer";
@@ -25,7 +32,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function SchedulesView () {
+const SchedulesView = () => {
     const classes = useStyles();
     return (
         <div>
@@ -83,3 +90,7 @@ export default function SchedulesView () {
         </div>
     )
 }
+
+export default compose(
+    privateRoute
+)(SchedulesView);
