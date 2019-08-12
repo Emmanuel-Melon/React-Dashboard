@@ -41,6 +41,7 @@ class LogoutButton extends Component {
     async handleClick () {
         try {
             await this.props.firebase.doSignOut();
+            localStorage.removeItem('Authorization');
             this.props.history.push("/");
         } catch (e) {
             this.props.history.push("/landing");

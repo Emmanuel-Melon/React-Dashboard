@@ -83,7 +83,7 @@ class LoginForm extends Component {
         this.setState({ isLoading: true });
         try {
             let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
-           console.log(authUser);
+            localStorage.setItem('Authorization', authUser.user.ra);
             this.setState({ isLoading: false });
             this.props.history.push("/");
 
