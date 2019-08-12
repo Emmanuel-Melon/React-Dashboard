@@ -7,6 +7,11 @@ import Spinner from "../components/Spinners/Spinner";
 import { AuthConsumer } from "../services/auth";
 
 /**
+ * views
+ */
+import MustBeLoggedIn from "../views/MustBeLoggedIn";
+
+/**
  *
  * @param Component
  * @param rest
@@ -25,7 +30,7 @@ const privateRoute = Component => {
                                     (authUser !== null) ? (
                                         <Component />
                                     ) : (
-                                        <Spinner />
+                                        <MustBeLoggedIn />
                                     )
 
                                 }

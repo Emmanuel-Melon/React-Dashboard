@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * HOCs
+ */
+import { compose } from "recompose";
+import privateRoute from "../HOCs/PrivateRoute";
+
+
 import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
 
@@ -76,4 +83,6 @@ const ProfileView = ({ match }) => {
     )
 };
 
-export default ProfileView;
+export default compose(
+    privateRoute
+)(ProfileView);

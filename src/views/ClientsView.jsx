@@ -1,6 +1,12 @@
 import React from "react";
 
 /**
+ * HOCs
+ */
+import { compose } from "recompose";
+import privateRoute from "../HOCs/PrivateRoute";
+
+/**
  * grid
  */
 import GridContainer from "../components/Grid/GridContianer";
@@ -37,7 +43,7 @@ const useStyles = makeStyles(theme => (
  * @return {*}
  * @constructor
  */
-const NotFoundView = () => {
+const ClientsView = () => {
     const classes = useStyles();
     return (
         <div>
@@ -65,4 +71,6 @@ const NotFoundView = () => {
     )
 };
 
-export default NotFoundView;
+export default compose(
+    privateRoute
+)(ClientsView);

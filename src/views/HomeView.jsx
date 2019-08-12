@@ -1,6 +1,12 @@
 import React from "react";
 
 /**
+ * HOCs
+ */
+import { compose } from "recompose";
+import privateRoute from "../HOCs/PrivateRoute";
+
+/**
  * grid
  */
 import GridContainer from "../components/Grid/GridContianer";
@@ -54,4 +60,6 @@ const HomeView = () => {
     )
 };
 
-export default HomeView;
+export default compose(
+    privateRoute
+)(HomeView);

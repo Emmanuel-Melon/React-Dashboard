@@ -1,6 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, withRouter, NavLink } from "react-router-dom";
 
+/**
+ * HOCs
+ */
+import { compose } from "recompose";
+import privateRoute from "../HOCs/PrivateRoute";
+
+
 import GridContainer from "../components/Grid/GridContianer";
 import GridItem from "../components/Grid/GridItem";
 
@@ -8,28 +15,7 @@ import ListAgents from "../agents/ListAgents";
 import FilterAgents from "../agents/FilterAgents";
 import Greeting from "../components/Greetings/Greetings";
 
-// communicating to a parent via an event?
-// sounds like a plan?
-const users = [
-    {
-        id: 1,
-        name: "Emmanuel Gatwech"
-    },
-    {
-        id: 2,
-        name: "Kengo Louis"
-    },
-    {
-        id: 3,
-        name: "Atem Aguer"
-    },
-    {
-        id: 4,
-        name: "Vibm Mayanja"
-    }
-];
-
-class UsersView extends React.Component {
+class AgentsView extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -62,5 +48,7 @@ class UsersView extends React.Component {
     }
 };
 
-export default UsersView;
+export default compose(
+    privateRoute
+)(AgentsView);
 
