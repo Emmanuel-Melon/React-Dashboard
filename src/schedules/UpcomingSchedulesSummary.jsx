@@ -34,30 +34,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const completed = [
-    {
-        id: 1,
-        name: "Muyenga",
-        letter: "M",
-        description: "Some description about this neighborhood",
-        completedAt: "25/07/2019",
-        summary: "Kengo visited Client 012"
-    },
-    {
-        id: 2,
-        name: "Kansanga",
-        letter: "K",
-        description: "Some description about this neighborhood",
-        completedAt: "25/07/2019",
-        summary: "Bill Kabanga"
-    },
-    {
-        id: 3,
-        name: "Kansanga",
-        letter: "K",
-        description: "Some description about this neighborhood",
-        completedAt: "25/07/2019",
-        summary: "Emmanuel Gatwech"
-    }
 ];
 
 export default function Completed() {
