@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import _ from "lodash";
 
 /**
  * HOCs
@@ -15,51 +16,156 @@ import GridItem from "../components/Grid/GridItem";
 /**
  * core components
  */
-import Completed from "../schedules/CompletedSchedulesSummary";
 import Maps from "../components/Maps/Maps";
-import Upcoming from "../schedules/UpcomingSchedulesSummary";
 import Greeting from "../components/Greetings/Greetings";
+import Notifications from "../provider/Notifications";
+import PricingInfo from "../provider/PricingInfo";
+import Ratings from "../provider/Ratings";
+import TripsDone from "../provider/TripsDone";
+import ContactInfo from "../provider/ContactInfo";
+import ErrorComponent from "../components/Error/ErrorComponent";
+
+/**
+ * material-ui/core
+ */
+import {
+    Typography
+} from "@material-ui/core";
+
 /**
  * styles
  */
-import {makeStyles} from '@material-ui/core/styles';
-const useStyles = makeStyles(theme => (
+import { withStyles } from '@material-ui/core/styles';
+import {fetchData} from "../services/api";
+const styles = theme => (
     {
         Content: {
             marginBottom: 16
         }
     }
-));
+);
 
 
 /**
  * @return {*}
  * @constructor
  */
-const HomeView = () => {
-    const classes = useStyles();
-    return (
-        <div>
+class HomeView extends Component {
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            collectionDays: [],
+            district: "",
+            isLoading: true,
+            officeLocation: "",
+            name: "",
+            parishes: [],
+            price: [],
+            rating: 0,
+            serviceLocation: "",
+            tripsDone: "",
+            error: false,
+            errorMessage: ""
+        }
+    }
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+        const res = await fetchData("provider/GarbageCollectors/homeklin");
+        const {
+            data,
+            err,
+            errorMessage
+        } = res;
+        if(err) {
+            this.setState({ error: true, errorMessage})
+        } else{
+            let provider = data.provider || [];
+            const collectionDays = provider.collectionDays || [];
+            const district = provider.district || "";
+            const name = provider.name || "";
+            const officeLocation = provider.officeLocation || [];
+            const parishes = provider.parishes || [];
+            const price = provider.price || {};
+            const rating = provider.rating || 0;
+            const serviceLocation = provider.serviceLocation || "";
+            const tripsDone = provider.tripsDone || "";
+            const info = Object.assign({}, {
+                collectionDays,
+                district,
+                name,
+                officeLocation,
+                parishes,
+                price,
+                rating,
+                serviceLocation,
+                tripsDone
+            });
+
+            this.setState({ isLoading: false, ...info });
+            console.log(this.state);
+        }
+    }
+
+    render () {
+        const { classes }= this.props;
+        const { name, serviceLocation, officeLocation, district } = this.state || {};
+        const info = {
+            name,
+            serviceLocation,
+            officeLocation,
+            district
+        };
+        if(this.state.error === true ) {
+            return <ErrorComponent message="An error has occurred" />
+        }
+        return (
             <div>
-                <Greeting/>
+                <div>
+                    <Greeting/>
+                </div>
+                <GridContainer>
+                    <GridItem xs={12} sm={12} md={4} lg={4}>
+                        <Typography variant={"h4"}>
+                            Provider Summary
+                        </Typography>
+                        <Typography variant={"h6"}>
+                            A summary of all of your business activities
+                        </Typography>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4} lg={4}>
+                        <div className={classes.Content}>
+                            <TripsDone trips={this.state.tripsDone}/>
+                        </div>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4} lg={4}>
+                        <div className={classes.Content}>
+                            <Ratings rating={this.state.rating}/>
+                        </div>
+                    </GridItem>
+                </GridContainer>
+                <GridContainer>
+                    <GridItem xs={12} sm={12} md={4} lg={4}>
+                        <div className={classes.Content}>
+                            <ContactInfo info={info} />
+                        </div>
+                        <div className={classes.Content}>
+                            <PricingInfo price={this.state.price}/>
+                        </div>
+                        <div  className={classes.Content}>
+                            <Notifications />
+                        </div>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={8} lg={8}>
+                        <Maps />
+                    </GridItem>
+                </GridContainer>
             </div>
-            <GridContainer>
-                <GridItem xs={12} sm={12} md={4} lg={4}>
-                    <div className={classes.Content}>
-                        <Upcoming/>
-                    </div>
-                    <div  className={classes.Content}>
-                        <Completed />
-                    </div>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8} lg={8}>
-                    <Maps />
-                </GridItem>
-            </GridContainer>
-        </div>
-    )
-};
+        )
+    }
+}
 
 export default compose(
-    privateRoute
+    privateRoute,
+    withStyles(styles)
 )(HomeView);
