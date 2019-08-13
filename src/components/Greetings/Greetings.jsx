@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 /**
  * core components
  */
+import ErrorComponent from "../Error/ErrorComponent";
 
 /**
  * styles
@@ -40,20 +41,34 @@ class Greeting extends Component {
         super(props);
         this.state = {
             name: "",
-            isLoading: true
+            error: false,
+            errorMessage: ""
         }
     }
 
     async componentDidMount() {
         this.setState({ isLoading: true });
         const res = await fetchData("provider/GarbageCollectors/homeklin");
-        let data = res.data.provider || [];
-        const name = data.name || [];
-        console.log(name);
-        this.setState({ isLoading: false, name });
+        const {
+            data,
+            err,
+            errorMessage
+        } = res;
+        if(err) {
+            this.setState({ error: true, errorMessage: errorMessage });
+        } else {
+            console.log(data);
+            const { provider } = data;
+            console.log(provider.name);
+            const name = provider.name || "";
+            this.setState({ isLoading: false, name });
+        }
     }
     render () {
         const { classes } = this.props;
+        if(this.state.error === true ) {
+            return <ErrorComponent message="An error has occurred" />
+        }
         return (
             <div className={classes.Wrapper}>
                 <div className={classes.Content}>

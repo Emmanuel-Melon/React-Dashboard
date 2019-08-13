@@ -21,6 +21,6 @@ const ErrorComponent = (props) => {
       <span className="error__message">{message}</span>
     </div>
   )
-}
+};
 
 export default ErrorComponent;

@@ -47,37 +47,20 @@ class CollectionDays extends Component {
         }
     }
 
-
     render () {
         const { classes } = this.props;
-    return (
-        <List
-            className={classes.root}
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    Collection Days
-                </ListSubheader>
-            }
-        >
-            {
-                this.state.days.map(index => {
-                    return (
-                        <ListItem className={classes.ContactDetail}>
-                            <ListItemAvatar>
-                                <Avatar className={classes.avatar}>
-                                    <ImageIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={index}
-                            />
-                        </ListItem>
-                    )
-                })
-            }
-        </List>
-    );
-}
+        return (
+            <List
+                className={classes.root}
+                subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                        Notifications
+                    </ListSubheader>
+                }
+            >
+            </List>
+        );
+    }
 }
 
 export default withStyles(styles)(CollectionDays);
