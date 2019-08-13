@@ -43,41 +43,60 @@ class CollectionDays extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            collectionDays: [],
             isLoading: true
         }
     }
 
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+        const res = await fetchData("provider/GarbageCollectors/homeklin");
+        const {
+            data,
+            err,
+            errorMessage
+        } = res;
+
+        if (err) {
+            this.setState({ parishes: [] });
+        } else {
+            console.log(data);
+            const collectionDays = data.provider.collectionDays || [];
+            console.log(collectionDays);
+            this.setState({ isLoading: false, collectionDays });
+        }
+    }
 
     render () {
         const { classes } = this.props;
-    return (
-        <List
-            className={classes.root}
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    Collection Days
-                </ListSubheader>
-            }
-        >
-            {
-                this.state.days.map(index => {
-                    return (
-                        <ListItem className={classes.ContactDetail}>
-                            <ListItemAvatar>
-                                <Avatar className={classes.avatar}>
-                                    <ImageIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={index}
-                            />
-                        </ListItem>
-                    )
-                })
-            }
-        </List>
-    );
-}
+        return (
+            <List
+                className={classes.root}
+                subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                        Collection Days
+                    </ListSubheader>
+                }
+            >
+                {
+                    this.state.collectionDays.map(index => {
+                        return (
+                            <ListItem className={classes.ContactDetail}>
+                                <ListItemAvatar>
+                                    <Avatar className={classes.avatar}>
+                                        <ImageIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={index}
+                                />
+                            </ListItem>
+                        )
+                    })
+                }
+            </List>
+        );
+    }
 }
 
 export default withStyles(styles)(CollectionDays);
