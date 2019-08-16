@@ -23,6 +23,7 @@ import Nav from "./components/Nav/Nav";
 /**
  * views
  */
+import AccountView from "./views/AccountManagement/AccountView";
 import AgentsView from "./views/AgentsView";
 import CreateAgentView from "./views/CreateAgentView";
 import HomeView from "./views/HomeView";
@@ -50,6 +51,7 @@ class App extends Component {
                 <main>
                     <Switch>
                         <Route exact path="/" component={HomeView} />
+                        <Route exact path="/account" component={AccountView} />
                         <Route exact path="/agents" component={AgentsView} />
                         <Route exact path="/agents/create" component={CreateAgentView} />
                         <Route exact path="/login" component={LoginView} />
