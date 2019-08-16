@@ -24,6 +24,8 @@ import Ratings from "../provider/Ratings";
 import TripsDone from "../provider/TripsDone";
 import ContactInfo from "../provider/ContactInfo";
 import ErrorComponent from "../components/Error/ErrorComponent";
+import PreloaderAnimation from "../components/Loaders/PreloaderAnimation";
+import Spinner from "../components/Spinners/Spinner";
 
 /**
  * material-ui/core
@@ -135,29 +137,65 @@ class HomeView extends Component {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4} lg={4}>
                         <div className={classes.Content}>
-                            <TripsDone trips={this.state.tripsDone}/>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <TripsDone trips={this.state.tripsDone}/>
+                                )
+                            }
                         </div>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4} lg={4}>
                         <div className={classes.Content}>
-                            <Ratings rating={this.state.rating}/>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <Ratings rating={this.state.rating}/>
+                                )
+                            }
                         </div>
                     </GridItem>
                 </GridContainer>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={4} lg={4}>
                         <div className={classes.Content}>
-                            <ContactInfo info={info} />
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <ContactInfo info={info} />
+                                )
+                            }
                         </div>
                         <div className={classes.Content}>
-                            <PricingInfo price={this.state.price}/>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <PricingInfo price={this.state.price}/>
+                                )
+                            }
                         </div>
                         <div  className={classes.Content}>
-                            <Notifications />
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <Notifications />
+                                )
+                            }
                         </div>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={8} lg={8}>
-                        <Maps />
+                        {
+                            (this.state.isLoading === true) ? (
+                                <Spinner />
+                            ) : (
+                                <Maps />
+                            )
+                        }
                     </GridItem>
                 </GridContainer>
             </div>
