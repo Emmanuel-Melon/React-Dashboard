@@ -30,7 +30,7 @@ const privateRoute = Component => {
                                     (authUser !== null) ? (
                                         <Component />
                                     ) : (
-                                        <Spinner />
+                                        null
                                     )
 
                                 }
