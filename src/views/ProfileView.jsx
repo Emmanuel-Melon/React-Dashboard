@@ -20,6 +20,8 @@ import AgentUpcomingTaskSummary from "../agents/AgentUpcomingTaskSummary";
 import AgentDocuments from "../agents/AgentDocuments";
 import UploadDocument from "../agents/UploadDocument";
 import ErrorComponent from "../components/Error/ErrorComponent";
+import PreloaderAnimation from "../components/Loaders/PreloaderAnimation";
+import Spinner from "../components/Spinners/Spinner";
 
 import Button from '@material-ui/core/Button';
 import Greeting from "../components/Greetings/Greetings";
@@ -28,6 +30,7 @@ import Greeting from "../components/Greetings/Greetings";
  */
 import { withStyles} from '@material-ui/core/styles';
 import {fetchData} from "../services/api";
+import CollectionParishes from "../schedules/CollectionParishes";
 const styles = theme => (
     {
         Menu: {
@@ -60,7 +63,8 @@ class ProfileView extends Component{
             serviceProvider: "Homeklin",
             serviceType: "GarbageCollection",
             error: false,
-            errorMessage: ""
+            errorMessage: "",
+            isLoading: false
         }
     }
 
@@ -73,7 +77,7 @@ class ProfileView extends Component{
             errorMessage
         } = res;
         if(err) {
-            this.setState({ error: true, errorMessage: errorMessage });
+            this.setState({ error: true, errorMessage: errorMessage, isLoading: false });
         } else {
             console.log(data);
             this.setState({ isLoading: false });
@@ -82,9 +86,6 @@ class ProfileView extends Component{
 
     render () {
         const { classes } = this.props;
-        if(this.state.error === true ) {
-            return <ErrorComponent message="An error has occurred" />
-        }
         return (
             <div className={classes.Profile}>
 
@@ -104,18 +105,33 @@ class ProfileView extends Component{
                 </GridContainer>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={12} lg={4}>
-                        <AgentProfileCard />
+                        {
+                            (this.state.isLoading === true) ? (
+                                <Spinner />
+                            ) : (
+                                <AgentProfileCard />
+                            )
+                        }
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12} lg={4}>
                         <div>
-                            <AgentDocuments/>
-                        </div>
-                        <div>
-                            <UploadDocument/>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <AgentDocuments/>
+                                )
+                            }
                         </div>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12} lg={4}>
-                        <AgentUpcomingTaskSummary />
+                        {
+                            (this.state.isLoading === true) ? (
+                                <PreloaderAnimation />
+                            ) : (
+                                <AgentUpcomingTaskSummary />
+                            )
+                        }
                     </GridItem>
                 </GridContainer>
             </div>

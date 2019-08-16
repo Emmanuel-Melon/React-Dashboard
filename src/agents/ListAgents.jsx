@@ -7,7 +7,7 @@ import ManageAgents from "./ManageAgents";
 import fetchData from '../services/api';
 import ErrorComponent from "../components/Error/ErrorComponent";
 import _ from "lodash";
-import Spinner from "../components/Spinners/Spinner";
+import PreloaderAnimation from "../components/Loaders/PreloaderAnimation";
 import { compose } from "recompose";
 import { withStyles } from "@material-ui/core";
 
@@ -62,7 +62,7 @@ class ListUsers extends React.Component {
 
         if(this.state.isFetching === true) {
             return (
-                <Spinner/>
+                <PreloaderAnimation />
             );
         }
 

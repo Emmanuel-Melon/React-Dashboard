@@ -19,15 +19,23 @@ import GridItem from "../components/Grid/GridItem";
 /**
  * core components
  */
-import AddSchedule from "../schedules/AddSchedule";
 import CollectionDays from "../schedules/CollectionDays";
 import CollectionParishes from "../schedules/CollectionParishes";
-import Completed from "../schedules/CompletedSchedulesSummary"
 import Spinner from "../components/Spinners/Spinner";
-import Upcoming from "../schedules/UpcomingSchedulesSummary"
 import Table from "../components/Tables/Table";
-
+import PreloaderAnimation from "../components/Loaders/PreloaderAnimation";
 import Greeting from "../components/Greetings/Greetings";
+
+
+/**
+ * styles
+ */
+import { withStyles } from "@material-ui/core";
+const styles = theme => ({
+    content: {
+        marginBottom: 16
+    }
+});
 
 class SchedulesView extends Component {
 
@@ -59,6 +67,7 @@ class SchedulesView extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
                 <div>
@@ -66,11 +75,23 @@ class SchedulesView extends Component {
                 </div>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={4} lg={4}>
-                        <div>
-                            <CollectionDays />
+                        <div className={classes.content}>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <CollectionDays />
+                                )
+                            }
                         </div>
-                        <div>
-                            <CollectionParishes />
+                        <div className={classes.content}>
+                            {
+                                (this.state.isLoading === true) ? (
+                                    <PreloaderAnimation />
+                                ) : (
+                                    <CollectionParishes />
+                                )
+                            }
                         </div>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={8} lg={8}>
@@ -91,5 +112,6 @@ class SchedulesView extends Component {
 }
 
 export default compose(
-    privateRoute
+    privateRoute,
+    withStyles(styles)
 )(SchedulesView);
