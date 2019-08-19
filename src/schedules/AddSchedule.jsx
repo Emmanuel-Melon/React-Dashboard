@@ -63,7 +63,7 @@ class LoginForm extends Component {
         super(props);
 
         this.state = {
-            price: "",
+            collectionDay: "",
             isLoading: false,
             error: null
         };
@@ -100,7 +100,7 @@ class LoginForm extends Component {
             <div className={classes.Form}>
                 <div className={classes.FormContent}>
                     <div>
-                        <Typography variant={"h6"}>Current Price</Typography>
+                        <Typography variant={"h6"}>Current Collection Days</Typography>
                         {
                             (currentUser.displayName === null) ? (
                                 <Typography variant={"body1"}>Your email address</Typography>
@@ -110,13 +110,13 @@ class LoginForm extends Component {
                         }
                     </div>
                     <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Display Name">Email Address</InputLabel>
+                        <InputLabel htmlFor="Display Name">Add a new Collection Day</InputLabel>
                         <Input
-                            id="Email Address"
-                            type='email'
-                            placeholder='Email Address'
-                            name='email'
-                            value={this.state.email}
+                            id="Collection Day"
+                            type='text'
+                            placeholder='Collection Day'
+                            name='collectionDay'
+                            value={this.state.collectionDay}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start"  className={classes.InputAdornment}>
