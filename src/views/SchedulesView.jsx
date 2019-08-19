@@ -56,7 +56,7 @@ class SchedulesView extends Component {
         });
         // ["Address", "Service Type", "Location Type", "Amount"]
         data = data.map(item => {
-            return _.pick(item, ["address", "serviceType", "locationType", "amount"]);
+            return _.pick(item, ["name", "address", "serviceType", "locationType"]);
         });
         data = data.map(item => {
             return Object.values(item);

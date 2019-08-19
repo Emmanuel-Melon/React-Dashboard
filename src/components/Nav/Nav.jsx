@@ -37,6 +37,7 @@ class Nav extends Component {
                                     <NavLink to="/">Home</NavLink>
                                     <NavLink to="/agents">Agents</NavLink>
                                     <NavLink to="/schedules">Schedules</NavLink>
+                                    <NavLink to="/account">Account</NavLink>
                                     <NavLink to="/logout">Logout</NavLink>
                                 </div>
                             ) : (

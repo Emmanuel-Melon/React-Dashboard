@@ -23,6 +23,7 @@ import Nav from "./components/Nav/Nav";
 /**
  * views
  */
+import AccountView from "./views/AccountManagement/AccountView";
 import AgentsView from "./views/AgentsView";
 import CreateAgentView from "./views/CreateAgentView";
 import HomeView from "./views/HomeView";
@@ -31,12 +32,14 @@ import LogoutView from "./views/LogoutView";
 import NotFoundView from "./views/NotFoundView";
 import ProfileView from "./views/ProfileView";
 import SchedulesView from "./views/SchedulesView";
+import RegisterProvider from "./provider/RegisterProvider";
 
 /**
  * styles
  */
 import "./App.css";
 import RegisterUser from './views/Auth/RegistrationView';
+
 
 
 class App extends Component {
@@ -50,6 +53,8 @@ class App extends Component {
                 <main>
                     <Switch>
                         <Route exact path="/" component={HomeView} />
+                        <Route exact path="/account" component={AccountView} />
+                        <Route exact path="/account/complete" component={RegisterProvider} />
                         <Route exact path="/agents" component={AgentsView} />
                         <Route exact path="/agents/create" component={CreateAgentView} />
                         <Route exact path="/login" component={LoginView} />
