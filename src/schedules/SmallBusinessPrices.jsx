@@ -104,7 +104,7 @@ class LoginForm extends Component {
             <div className={classes.Form}>
                 <div className={classes.FormContent}>
                     <div>
-                        <Typography variant={"h6"}>Current Email</Typography>
+                        <Typography variant={"h6"}>Current Price</Typography>
                         {
                             (currentUser.displayName === null) ? (
                                 <Typography variant={"body1"}>Your email address</Typography>
