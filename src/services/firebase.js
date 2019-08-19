@@ -58,6 +58,13 @@ class Firebase {
      */
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
+
+    /**
+     *
+     */
+    updateProfile = profile => {
+        return this.auth.currentUser.updateProfile(profile)
+    }
 }
 
 // what's this default value?

@@ -1,59 +1,144 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import withFirebase from "../../HOCs/withFirebase";
+import Spinner from "../Spinners/Spinner";
 
+/**
+ * @material-ui/core
+ */
 import {
-    IconButton,
+    Button,
+    Input,
+    InputLabel,
+    InputAdornment,
+    FormControl,
     Typography
 } from "@material-ui/core";
-
 
 /**
  * icons
  */
-import ImageIcon from '@material-ui/icons/Add';
+import PasswordIcon from '@material-ui/icons/Mail';
 
-const useStyles = makeStyles(theme => ({
-    Action: {
-        color: "orange"
+/**
+ * styles
+ */
+import { withStyles } from "@material-ui/core/styles";
+const loginStyles = theme => ({
+    Button: {
+        background: "#e08c05",
+        margin: 8
     },
-    root: {
-        width: '100%',
-        background: "#fff",
-        padding: 16,
-        marginTop: 16,
-        marginBottom: 16,
-        display: "flex"
-    },
-    IconDiv: {
-        flex: 1,
+    ButtonArea: {
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        flex: 1
     },
-    ActionDiv: {
-        flex: 2,
-        display: "flex", alignItems: "center"
+    Form: {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: 32,
+        minWidth: 360,
     },
-    Icon: {
-        background: "#cef2d0",
-        borderRadius: "50%",
-        color: "#68c46c",
-        fontSize: "1.5em"
+    FormControl: {
+        width: "80%",
+        margin: 8
+    },
+    InputAdornment: {
+        color: "#e08c05"
+    },
+    FormContent: {
+        display: "flex",
     }
-}));
+});
 
-export default function FolderList() {
-    const classes = useStyles();
 
-    return (
-        <div className={classes.root}>
-            <div className={classes.IconDiv}>
-                <IconButton>
-                    <ImageIcon className={classes.Icon}/>
-                </IconButton>
+/**
+ * login form
+ */
+class LoginForm extends Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            email: "",
+            isLoading: false,
+            error: null
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target
+        this.setState({ [name]: value });
+    };
+
+    handleFormSubmit = async event => {
+        event.preventDefault();
+        try {
+            this.setState({ isLoading: true });
+            let authUser = await this.props.firebase.auth.currentUser;
+            await authUser.updateProfile({
+                email: this.state.email
+            });
+            this.setState({ isLoading: false });
+
+        } catch (e) {
+            console.log("error has occured");
+            console.log(e);
+            this.setState({ error: e });
+            console.log(this.state)
+        }
+    };
+    render () {
+        const { classes, firebase } = this.props;
+        console.log(firebase);
+        const currentUser = firebase.auth.currentUser;
+        if(this.state.isLoading === true ) {
+            return <Spinner />
+        }
+        return (
+            <div className={classes.Form}>
+                <div className={classes.FormContent}>
+                    <div>
+                        <Typography variant={"h6"}>Current Email</Typography>
+                        {
+                            (currentUser.displayName === null) ? (
+                                <Typography variant={"body1"}>Your email address</Typography>
+                            ) : (
+                                <Typography variant={"body1"}>{currentUser.email}</Typography>
+                            )
+                        }
+                    </div>
+                    <FormControl className={classes.FormControl}>
+                        <InputLabel htmlFor="Display Name">Email Address</InputLabel>
+                        <Input
+                            id="Email Address"
+                            type='email'
+                            placeholder='Email Address'
+                            name='email'
+                            value={this.state.email}
+                            onChange={this.handleInputChange}
+                            startAdornment={
+                                <InputAdornment position="start"  className={classes.InputAdornment}>
+                                    <PasswordIcon />
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                    <div className={classes.ButtonArea}>
+                        <Button onClick={this.handleFormSubmit} variant="contained" className={classes.Button}>Change</Button>
+                    </div>
+                </div>
             </div>
-            <div className={classes.ActionDiv}>
-                <Typography variant={"h5"} className={classes.Action}>Add Picking Day</Typography>
-            </div>
-        </div>
-    );
+        )
+    }
 }
+
+export default compose(
+    withFirebase,
+    withRouter,
+    withStyles(loginStyles)
+)(LoginForm);

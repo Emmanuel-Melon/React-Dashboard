@@ -19,8 +19,7 @@ import {
 /**
  * icons
  */
-import EmailIcon from '@material-ui/icons/Email';
-import PasswordIcon from '@material-ui/icons/Lock';
+import PasswordIcon from '@material-ui/icons/Mail';
 
 /**
  * styles
@@ -37,6 +36,8 @@ const loginStyles = theme => ({
         flex: 1
     },
     Form: {
+        display: "flex",
+        justifyContent: "space-between",
         padding: 32,
         minWidth: 360,
     },
@@ -62,7 +63,6 @@ class LoginForm extends Component {
 
         this.state = {
             email: "",
-            password: "",
             isLoading: false,
             error: null
         };
@@ -77,38 +77,49 @@ class LoginForm extends Component {
 
     handleFormSubmit = async event => {
         event.preventDefault();
-        this.setState({ isLoading: true });
         try {
-            let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
-            localStorage.setItem('Authorization', authUser.user.ra);
+            this.setState({ isLoading: true });
+            let authUser = await this.props.firebase.auth.currentUser;
+            await authUser.updateProfile({
+                email: this.state.email
+            });
             this.setState({ isLoading: false });
-            this.props.history.push("/");
 
         } catch (e) {
             console.log("error has occured");
             console.log(e);
-            // this.props.history.push();
             this.setState({ error: e });
             console.log(this.state)
         }
     };
     render () {
-        const { classes } = this.props;
-
+        const { classes, firebase } = this.props;
+        console.log(firebase);
+        const currentUser = firebase.auth.currentUser;
         if(this.state.isLoading === true ) {
             return <Spinner />
         }
         return (
             <div className={classes.Form}>
                 <div className={classes.FormContent}>
+                    <div>
+                        <Typography variant={"h6"}>Current Email</Typography>
+                        {
+                            (currentUser.displayName === null) ? (
+                                <Typography variant={"body1"}>Your email address</Typography>
+                            ) : (
+                                <Typography variant={"body1"}>{currentUser.email}</Typography>
+                            )
+                        }
+                    </div>
                     <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Password">Change Email</InputLabel>
+                        <InputLabel htmlFor="Display Name">Email Address</InputLabel>
                         <Input
-                            id="Password"
+                            id="Email Address"
                             type='email'
-                            placeholder='Password'
-                            name='password'
-                            value={this.state.password}
+                            placeholder='Email Address'
+                            name='email'
+                            value={this.state.email}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start"  className={classes.InputAdornment}>

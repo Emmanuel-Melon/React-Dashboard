@@ -19,8 +19,7 @@ import {
 /**
  * icons
  */
-import EmailIcon from '@material-ui/icons/Email';
-import PasswordIcon from '@material-ui/icons/Lock';
+import PasswordIcon from '@material-ui/icons/Smartphone';
 
 /**
  * styles
@@ -37,6 +36,8 @@ const loginStyles = theme => ({
         flex: 1
     },
     Form: {
+        display: "flex",
+        justifyContent: "space-between",
         padding: 32,
         minWidth: 360,
     },
@@ -61,8 +62,7 @@ class LoginForm extends Component {
         super(props);
 
         this.state = {
-            email: "",
-            password: "",
+            phoneNumber: "",
             isLoading: false,
             error: null
         };
@@ -77,38 +77,49 @@ class LoginForm extends Component {
 
     handleFormSubmit = async event => {
         event.preventDefault();
-        this.setState({ isLoading: true });
         try {
-            let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
-            localStorage.setItem('Authorization', authUser.user.ra);
+            this.setState({ isLoading: true });
+            let authUser = await this.props.firebase.auth.currentUser;
+            await authUser.updateProfile({
+                phoneNumber: this.state.phoneNumber
+            });
             this.setState({ isLoading: false });
-            this.props.history.push("/");
 
         } catch (e) {
             console.log("error has occured");
             console.log(e);
-            // this.props.history.push();
             this.setState({ error: e });
             console.log(this.state)
         }
     };
     render () {
-        const { classes } = this.props;
-
+        const { classes, firebase } = this.props;
+        console.log(firebase);
+        const currentUser = firebase.auth.currentUser;
         if(this.state.isLoading === true ) {
             return <Spinner />
         }
         return (
             <div className={classes.Form}>
                 <div className={classes.FormContent}>
+                    <div>
+                        <Typography variant={"h6"}>Current Nnumber</Typography>
+                        {
+                            (currentUser.displayName === null) ? (
+                                <Typography variant={"body1"}>You haven't added a Phone Number yet.</Typography>
+                            ) : (
+                                <Typography variant={"body1"}>{currentUser.phoneNumber}</Typography>
+                            )
+                        }
+                    </div>
                     <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Password">Change Email</InputLabel>
+                        <InputLabel htmlFor="Phone Number">Phone Number</InputLabel>
                         <Input
-                            id="Password"
-                            type='email'
-                            placeholder='Password'
-                            name='password'
-                            value={this.state.password}
+                            id="Phone Number"
+                            type='text'
+                            placeholder='Phone Number'
+                            name='phoneNumber'
+                            value={this.state.phoneNumber}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start"  className={classes.InputAdornment}>
