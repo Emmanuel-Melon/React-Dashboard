@@ -73,7 +73,10 @@ class HomeView extends Component {
     }
     async componentDidMount() {
         this.setState({ isLoading: true });
-        const res = await fetchData("provider/GarbageCollectors/homeklin");
+        let provider = localStorage.getItem("provider");
+        provider = JSON.parse(provider);
+        const info = provider.data.provider.providerName;
+        const res = await fetchData(`provider/GarbageCollectors/${info}`);
         const {
             data,
             err,

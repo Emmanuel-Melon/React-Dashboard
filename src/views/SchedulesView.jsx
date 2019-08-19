@@ -88,8 +88,10 @@ class SchedulesView extends Component {
     }
 
     async componentDidMount () {
-
-        const res = await fetchData("schedules/provider/deersmart");
+        let provider = localStorage.getItem("provider");
+        provider = JSON.parse(provider);
+        const info = provider.data.provider.providerName;
+        const res = await fetchData(`schedules/provider/${info}`);
         let data = res.data.schedules;
         data = data.map(item => {
             return _.omitBy(item, _.isObject);

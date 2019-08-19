@@ -26,6 +26,7 @@ import PasswordIcon from '@material-ui/icons/Lock';
  * styles
  */
 import { withStyles } from "@material-ui/core/styles";
+import {fetchData} from "../../services/api";
 const loginStyles = theme => ({
     Button: {
         background: "#e08c05",
@@ -83,6 +84,8 @@ class LoginForm extends Component {
         this.setState({ isLoading: true });
         try {
             let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
+            // const thisProvider = await fetchData(`provider/${providerName}`);
+            // localStorage.setItem('provider', thisProvider);
             localStorage.setItem('Authorization', authUser.user.ra);
             this.setState({ isLoading: false });
             this.props.history.push("/");

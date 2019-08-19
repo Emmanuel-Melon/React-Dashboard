@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import withFirebase from "../HOCs/withFirebase";
 import Spinner from "../components/Spinners/Spinner";
-import { postData } from "../services/api";
+import { fetchData, postData } from "../services/api";
 
 /**
  * @material-ui/core
@@ -114,9 +114,13 @@ class LoginForm extends Component {
 
             const newProvider = await postData("provider/register", data);
             console.log(newProvider);
-
-
+            const resource = providerName.toLocaleLowerCase();
+            console.log(resource);
+            const thisProvider = await fetchData(`provider/GarbageCollectors/${resource}`);
+            console.log(thisProvider);
+            localStorage.setItem('provider', JSON.stringify(thisProvider));
             localStorage.setItem('Authorization', authUser.user.ra);
+
             this.setState({ isLoading: false });
 
             this.props.history.push("/");
