@@ -37,6 +37,46 @@ const styles = theme => ({
     }
 });
 
+//     ["Client", "Address", "Location Type", "Duration", "Collection Days"]
+const customHead = [
+    {
+        id: "client",
+        numeric: false,
+        disablePadding: true,
+        label: 'Client'
+    },
+    {
+        id: "address",
+        numeric: false,
+        disablePadding: true,
+        label: 'Address'
+    },
+    {
+        id: "locationType",
+        numeric: false,
+        disablePadding: true,
+        label: 'Location Type'
+    },
+    {
+        id: "duration",
+        numeric: false,
+        disablePadding: true,
+        label: 'Duration'
+    },
+    {
+        id: "collectionDays",
+        numeric: false,
+        disablePadding: true,
+        label: 'Collection Days'
+    }
+];
+
+
+// username, address, locationType, duration, numberOfPickups
+function createData(username, address, locationType, duration, numberOfPickups) {
+    return { username, address, locationType, duration, numberOfPickups };
+}
+
 class SchedulesView extends Component {
 
     constructor (props) {
@@ -54,16 +94,20 @@ class SchedulesView extends Component {
         data = data.map(item => {
             return _.omitBy(item, _.isObject);
         });
-        // ["Address", "Service Type", "Location Type", "Amount"]
+        // ["Username", "Address", "Completed", "Location Type", "Duration", "Collection Days"]
         data = data.map(item => {
-            return _.pick(item, ["name", "address", "serviceType", "locationType"]);
+            return _.pick(item, ["username", "address", "locationType", "duration", "numberOfPickups"]);
         });
         data = data.map(item => {
             return Object.values(item);
         });
-        console.log(data);
+        const customRows = data.map(item => {
+            return createData(...item);
+        });
 
-        this.setState(({tableData: data, isLoading: false }));
+        console.log(customRows)
+
+        this.setState(({tableData: customRows, isLoading: false }));
     }
 
     render() {
@@ -99,7 +143,7 @@ class SchedulesView extends Component {
                             { this.state.tableData.length === 0 ?
                                 <Spinner /> : <Table
                                     tableHeaderColor="primary"
-                                    tableHead={["Address", "Service Type", "Location Type", "Amount"]}
+                                    tableHead={customHead}
                                     tableData={this.state.tableData}
 
                                 />}
