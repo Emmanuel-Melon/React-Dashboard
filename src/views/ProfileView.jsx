@@ -70,7 +70,10 @@ class ProfileView extends Component{
 
     async componentDidMount() {
         this.setState({ isLoading: true });
-        const res = await fetchData("agents/0lxTWmaZl0gA97V0JpfsuiVEbUk1");
+        let provider = localStorage.getItem("provider");
+        provider = JSON.parse(provider);
+        const info = provider.data.provider.providerName;
+        const res = await fetchData(`agents/${info}`);
         const {
             data,
             err,
