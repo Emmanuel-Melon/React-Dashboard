@@ -36,7 +36,10 @@ class ListUsers extends React.Component {
     handleFetchingAgents = async () => {
         this.setState({ isFetching: true });
         const { error, notFound } = this.state;
-        const result = await fetchData('provider/GarbageCollectors/homeklin/agents');
+        let provider = localStorage.getItem("provider");
+        provider = JSON.parse(provider);
+        const info = provider.data.provider.providerName;
+        const result = await fetchData(`provider/GarbageCollectors/${info}/agents`);
         const { errorMessage, data = {} } = result;
         let { agents = [] } = data;
         agents = _.values(agents);

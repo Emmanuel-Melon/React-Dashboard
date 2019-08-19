@@ -92,6 +92,7 @@ class AddAgent extends Component {
                 serviceType: "GarbageCollection"
             });
             agent = _.omit(agent, "error");
+
             let user = await postData("agents/register", agent);
             console.log(user);
             this.props.history.push("/agents");
