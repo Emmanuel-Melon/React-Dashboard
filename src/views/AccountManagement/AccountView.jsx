@@ -31,7 +31,7 @@ const useStyles = makeStyles({
       display: "flex",
     },
     Sidebar: {
-        background: "#fff",
+
         flexGrow: 1
     },
     Wrapper: {
@@ -55,10 +55,10 @@ export default function AccountView () {
                         <AccountSidebar />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={9} lg={9} className={classes.Content}>
-                            <Route path="Info" component={PersonalInfo} />
-                            <Route path="/account/About" component={About} />
-                            <Route path="/account/Password" component={PasswordManagement} />
-                            <Route path="/account/logout" component={Logout} />
+                            <Route exact path="/account/info" component={PersonalInfo} />
+                            <Route exact path="/account/about" component={About} />
+                            <Route exact path="/account/password" component={PasswordManagement} />
+                            <Route exact path="/account/logout" component={Logout} />
                     </GridItem>
                 </GridContainer>
             </div>

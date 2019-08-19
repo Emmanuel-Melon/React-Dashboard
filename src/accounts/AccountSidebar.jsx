@@ -16,8 +16,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 /**
  * material-ui/icons
  */
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import InfoIcon from '@material-ui/icons/MoveToInbox';
+import AboutIcon from '@material-ui/icons/MoveToInbox';
+import LogoutIcon from '@material-ui/icons/MoveToInbox';
+import VerifyIcon from '@material-ui/icons/Done';
+import PricingIcon from '@material-ui/icons/CreditCard';
+import SchedulesIcon from '@material-ui/icons/Today';
+import PasswordIcon from '@material-ui/icons/Lock';
 
 /**
  * styles
@@ -26,7 +31,7 @@ import { makeStyles } from "@material-ui/core";
 import ListSubheader from "@material-ui/core/ListSubheader";
 const useStyles = makeStyles({
     List: {
-        background: "#fff"
+
     },
     NavLink: {
         color: "#333",
@@ -34,32 +39,48 @@ const useStyles = makeStyles({
     }
 });
 
-// 'Info', 'Password', 'About', "logout", "Verify"
 const routes = [
     {
        id: 1,
        name: "info",
-        icon: ""
+       text: "Info",
+        icon: <InfoIcon />
     },
     {
         id: 2,
         name: "password",
-        icon: ""
+        text: "Password Management",
+        icon: <PasswordIcon />
     },
     {
         id: 3,
         name: "about",
-        icon: ""
+        text: "About",
+        icon: <AboutIcon />
     },
     {
         id: 4,
         name: "logout",
-        icon: ""
+        text: "Logout",
+        icon: <LogoutIcon />
     },
     {
         id: 5,
         name: "verify",
-        icon: ""
+        text: "Verify Account",
+        icon: <VerifyIcon />
+    },
+    {
+        id: 6,
+        name: "pricing",
+        text: "Pricing",
+        icon: <PricingIcon />
+    },
+    {
+        id: 7,
+        name: "schedules",
+        text: "Schedules",
+        icon: <SchedulesIcon />
     }
 ];
 
@@ -78,11 +99,13 @@ export default function AccountSidebar () {
                       </ListSubheader>
                   }
             >
-                {['Info', 'Password', 'About', "logout", "Verify" ].map((text, index) => (
-                    <NavLink to={`/account/${text}`} className={classes.NavLink}>
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                {routes.map(route => (
+                    <NavLink to={`/account/${route.name}`} className={classes.NavLink}>
+                        <ListItem button key={route.name}>
+                            <ListItemIcon>
+                                {route.icon}
+                            </ListItemIcon>
+                            <ListItemText primary={route.text} />
                         </ListItem>
                     </NavLink>
                 ))}

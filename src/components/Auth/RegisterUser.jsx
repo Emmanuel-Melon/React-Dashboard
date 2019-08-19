@@ -48,7 +48,7 @@ class RegisterUserComponent extends Component {
     try {
       const newUser = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
       localStorage.setItem('Authorization', newUser.user.ra);
-      this.props.history.push("/");
+      this.props.history.push("/account/complete");
     } catch(error) {
       const { message } = error;
       this.setState({
