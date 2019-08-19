@@ -101,13 +101,7 @@ class LoginForm extends Component {
                 <div className={classes.FormContent}>
                     <div>
                         <Typography variant={"h6"}>Current Collection Days</Typography>
-                        {
-                            (currentUser.displayName === null) ? (
-                                <Typography variant={"body1"}>Your email address</Typography>
-                            ) : (
-                                <Typography variant={"body1"}>{currentUser.email}</Typography>
-                            )
-                        }
+                        <p>You haven't set any yet.</p>
                     </div>
                     <FormControl className={classes.FormControl}>
                         <InputLabel htmlFor="Display Name">Add a new Collection Day</InputLabel>
