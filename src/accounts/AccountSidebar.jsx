@@ -16,9 +16,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 /**
  * material-ui/icons
  */
-import InfoIcon from '@material-ui/icons/MoveToInbox';
-import AboutIcon from '@material-ui/icons/MoveToInbox';
-import LogoutIcon from '@material-ui/icons/MoveToInbox';
+import InfoIcon from '@material-ui/icons/Assignment';
+import AboutIcon from '@material-ui/icons/Help';
+import LogoutIcon from '@material-ui/icons/KeyboardArrowLeft';
 import VerifyIcon from '@material-ui/icons/Done';
 import PricingIcon from '@material-ui/icons/CreditCard';
 import SchedulesIcon from '@material-ui/icons/Today';
@@ -53,6 +53,18 @@ const routes = [
         icon: <PasswordIcon />
     },
     {
+        id: 6,
+        name: "pricing",
+        text: "Pricing",
+        icon: <PricingIcon />
+    },
+    {
+        id: 7,
+        name: "schedules",
+        text: "Schedules",
+        icon: <SchedulesIcon />
+    },
+    {
         id: 3,
         name: "about",
         text: "About",
@@ -64,24 +76,6 @@ const routes = [
         text: "Logout",
         icon: <LogoutIcon />
     },
-    {
-        id: 5,
-        name: "verify",
-        text: "Verify Account",
-        icon: <VerifyIcon />
-    },
-    {
-        id: 6,
-        name: "pricing",
-        text: "Pricing",
-        icon: <PricingIcon />
-    },
-    {
-        id: 7,
-        name: "schedules",
-        text: "Schedules",
-        icon: <SchedulesIcon />
-    }
 ];
 
 /**

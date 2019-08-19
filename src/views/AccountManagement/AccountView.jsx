@@ -20,6 +20,8 @@ import PasswordManagement from "./PasswordManagement";
 import PersonalInfo from "./PersonalInfo";
 import About from "./About";
 import Logout from "../LogoutView";
+import Pricing from "./Pricing";
+import Schedules from "./Schedules";
 
 /**
  * styles
@@ -55,10 +57,14 @@ export default function AccountView () {
                         <AccountSidebar />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={9} lg={9} className={classes.Content}>
+                        <Switch>
                             <Route exact path="/account/info" component={PersonalInfo} />
                             <Route exact path="/account/about" component={About} />
                             <Route exact path="/account/password" component={PasswordManagement} />
+                            <Route exact path="/account/pricing" component={Pricing} />
+                            <Route exact path="/account/schedules" component={Schedules} />
                             <Route exact path="/account/logout" component={Logout} />
+                        </Switch>
                     </GridItem>
                 </GridContainer>
             </div>

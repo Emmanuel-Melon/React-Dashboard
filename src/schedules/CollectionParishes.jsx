@@ -64,7 +64,7 @@ class CollectionParishes extends Component {
                 className={classes.root}
                 subheader={
                     <ListSubheader component="div" id="nested-list-subheader">
-                        Neighborhoods
+                        Parishes
                     </ListSubheader>
                 }
             >

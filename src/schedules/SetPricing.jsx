@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import withFirebase from "../../HOCs/withFirebase";
-import Spinner from "../Spinners/Spinner";
+import withFirebase from "../HOCs/withFirebase";
+import Spinner from "../components/Spinners/Spinner";
 
 /**
  * @material-ui/core
@@ -19,8 +19,7 @@ import {
 /**
  * icons
  */
-import EmailIcon from '@material-ui/icons/Email';
-import PasswordIcon from '@material-ui/icons/Lock';
+import PasswordIcon from '@material-ui/icons/Mail';
 
 /**
  * styles
@@ -31,16 +30,27 @@ const loginStyles = theme => ({
         background: "#e08c05",
         margin: 8
     },
+    ButtonArea: {
+        display: "flex",
+        alignItems: "center",
+        flex: 1
+    },
     Form: {
+        display: "flex",
+        justifyContent: "space-between",
         padding: 32,
         minWidth: 360,
     },
     FormControl: {
-        width: "100%",
+        display: "block",
+        width: "80%",
         margin: 8
     },
     InputAdornment: {
         color: "#e08c05"
+    },
+    FormContent: {
+        display: "flex",
     }
 });
 
@@ -53,9 +63,7 @@ class LoginForm extends Component {
         super(props);
 
         this.state = {
-            oldPassword: "",
-            newPassword: "",
-            password: "",
+            email: "",
             isLoading: false,
             error: null
         };
@@ -70,38 +78,49 @@ class LoginForm extends Component {
 
     handleFormSubmit = async event => {
         event.preventDefault();
-        this.setState({ isLoading: true });
         try {
-            let authUser = await this.props.firebase.doPasswordUpdate()
-            localStorage.setItem('Authorization', authUser.user.ra);
+            this.setState({ isLoading: true });
+            let authUser = await this.props.firebase.auth.currentUser;
+            await authUser.updateProfile({
+                email: this.state.email
+            });
             this.setState({ isLoading: false });
-            this.props.history.push("/");
 
         } catch (e) {
             console.log("error has occured");
             console.log(e);
-            // this.props.history.push();
             this.setState({ error: e });
             console.log(this.state)
         }
     };
     render () {
-        const { classes } = this.props;
-
+        const { classes, firebase } = this.props;
+        console.log(firebase);
+        const currentUser = firebase.auth.currentUser;
         if(this.state.isLoading === true ) {
             return <Spinner />
         }
         return (
             <div className={classes.Form}>
-                <div>
+                <div className={classes.FormContent}>
+                    <div>
+                        <Typography variant={"h6"}>Current Email</Typography>
+                        {
+                            (currentUser.displayName === null) ? (
+                                <Typography variant={"body1"}>Your email address</Typography>
+                            ) : (
+                                <Typography variant={"body1"}>{currentUser.email}</Typography>
+                            )
+                        }
+                    </div>
                     <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Password">Old Password</InputLabel>
+                        <InputLabel htmlFor="Display Name">Email Address</InputLabel>
                         <Input
-                            id="Password"
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            value={this.state.password}
+                            id="Email Address"
+                            type='email'
+                            placeholder='Email Address'
+                            name='email'
+                            value={this.state.email}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start"  className={classes.InputAdornment}>
@@ -111,13 +130,13 @@ class LoginForm extends Component {
                         />
                     </FormControl>
                     <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Password">New Password</InputLabel>
+                        <InputLabel htmlFor="Display Name">Email Address</InputLabel>
                         <Input
-                            id="Password"
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            value={this.state.password}
+                            id="Email Address"
+                            type='email'
+                            placeholder='Email Address'
+                            name='email'
+                            value={this.state.email}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start"  className={classes.InputAdornment}>
@@ -127,14 +146,7 @@ class LoginForm extends Component {
                         />
                     </FormControl>
                     <div className={classes.ButtonArea}>
-                        <Button onClick={this.handleFormSubmit} variant="contained" className={classes.Button}>Change Password</Button>
-                    </div>
-
-                    <div>
-                        {this.state.error !== null ? <div>
-                            <p>Login Failed</p>
-                            <p>{this.state.error.message}</p>
-                        </div> : null }
+                        <Button onClick={this.handleFormSubmit} variant="contained" className={classes.Button}>Change</Button>
                     </div>
                 </div>
             </div>

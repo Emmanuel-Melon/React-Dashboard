@@ -65,7 +65,7 @@ class CollectionDays extends Component {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        primary="Operation Districts"
+                        primary="District"
                         secondary={info.district}
                     />
                 </ListItem>
@@ -76,7 +76,7 @@ class CollectionDays extends Component {
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        primary="Service Locations"
+                        primary="Divisions"
                         secondary={info.serviceLocation}
                     />
                 </ListItem>

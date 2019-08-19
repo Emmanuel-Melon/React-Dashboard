@@ -5,6 +5,8 @@ import React, { Component } from "react";
  */
 import Typography from "@material-ui/core/Typography";
 
+import { AuthConsumer } from "../../services/auth";
+
 /**
  * core components
  */
@@ -72,18 +74,21 @@ class Greeting extends Component {
         return (
             <div className={classes.Wrapper}>
                 <div className={classes.Content}>
-                    {
-                        (this.state.name.length === 0) ?
-                            (
-                                <Typography variant={"h3"}>
-                                    Hello, Yonja Customer :)
-                                </Typography>
-                            ) : (
-                                <Typography variant={"h3"}>
-                                    Hello, {this.state.name} :)
-                                </Typography>
-                            )
-                    }
+                    <AuthConsumer>
+                        { authUser => {
+                            console.log(authUser)
+                           return (authUser === null) ?
+                                 (
+                                    <Typography variant={"h3"}>
+                                        Hello, Yonja Customer :)
+                                    </Typography>
+                                ) : (
+                                    <Typography variant={"h3"}>
+                                        Hello, {authUser.displayName} :)
+                                    </Typography>
+                                )
+                        }}
+                    </AuthConsumer>
                     <Typography variant={"body1"}>
                         Welcome to your dashboard
                     </Typography>

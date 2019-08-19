@@ -86,11 +86,17 @@ class LoginForm extends Component {
         event.preventDefault();
         this.setState({ isLoading: true });
         try {
-            // let authUser = await this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password);
-            // localStorage.setItem('Authorization', authUser.user.ra);
-            // this.setState({ isLoading: false });
+            let authUser = await this.props.firebase.doCreateUserWithEmailAndPassword(
+                this.state.email,
+                this.state.password
+            );
+
+            await this.props.firebase.updateProfile({
+                displayName: this.state.companyName
+            });
+            localStorage.setItem('Authorization', authUser.user.ra);
+            this.setState({ isLoading: false });
             const provider = this.state;
-            const newProvider = await postData("provider/register", provider);
             this.props.history.push("/");
 
         } catch (e) {
@@ -196,7 +202,7 @@ class LoginForm extends Component {
 
                     <div>
                         {this.state.error !== null ? <div>
-                            <p>Login Failed</p>
+                            <p>Registration Failed</p>
                             <p>{this.state.error.message}</p>
                         </div> : null }
                     </div>

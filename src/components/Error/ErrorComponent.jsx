@@ -18,7 +18,8 @@ const ErrorComponent = (props) => {
       <div className="error__icon">
         <Warning className={classes.icon}/>
       </div>
-      <span className="error__message">{message}</span>
+      <span className="error__message">A network error has occurred.</span>
+        <p>Try refreshing the page</p>
     </div>
   )
 };
