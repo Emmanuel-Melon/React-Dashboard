@@ -65,13 +65,14 @@ class LoginForm extends Component {
         super(props);
 
         this.state = {
-            companyName: "",
+            providerName: "",
             email: "",
             password: "",
             isLoading: false,
             error: null,
             phoneNumber: "",
-            serviceType: ""
+            providerType: "",
+            username: ""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -91,12 +92,33 @@ class LoginForm extends Component {
                 this.state.password
             );
 
+            const {
+                providerName,
+                email,
+                password,
+                phoneNumber
+            } = this.state;
+
+            const data = {
+                providerName,
+                email,
+                password,
+                phoneNumber,
+                providerType: "GarbageCollectors",
+                uid: authUser.user.uid
+            }
+
             await this.props.firebase.updateProfile({
-                displayName: this.state.companyName
+                displayName: this.state.providerName
             });
+
+            const newProvider = await postData("provider/register", data);
+            console.log(newProvider);
+
+
             localStorage.setItem('Authorization', authUser.user.ra);
             this.setState({ isLoading: false });
-            const provider = this.state;
+
             this.props.history.push("/");
 
         } catch (e) {
@@ -170,28 +192,12 @@ class LoginForm extends Component {
                             id="Company Name"
                             type='text'
                             placeholder='Company Name'
-                            name='companyName'
-                            value={this.state.companyName}
+                            name='providerName'
+                            value={this.state.providerName}
                             onChange={this.handleInputChange}
                             startAdornment={
                                 <InputAdornment position="start" className={classes.InputAdornment}>
                                     <CompanyName />
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    <FormControl className={classes.FormControl}>
-                        <InputLabel htmlFor="Email Address">Service Type</InputLabel>
-                        <Input
-                            id="Service Type"
-                            type='text'
-                            placeholder='Service Type'
-                            name='serviceType'
-                            value={this.state.serviceType}
-                            onChange={this.handleInputChange}
-                            startAdornment={
-                                <InputAdornment position="start" className={classes.InputAdornment}>
-                                    <ServiceType />
                                 </InputAdornment>
                             }
                         />
